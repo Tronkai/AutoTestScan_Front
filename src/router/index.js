@@ -1,15 +1,36 @@
 import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+import TronscanUI from '../views/TronscanUI.vue'
+import TronscanAPI from '../views/TronscanAPI.vue'
+import DjedAPI from '../views/DjedAPI.vue'
+Vue.use(VueRouter)
 
-Vue.use(Router)
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/tronscanui',
+    name: 'TronscanUI',
+    component: TronscanUI
+  },
+  {
+    path: '/tronscanapi',
+    name: 'TronscanAPI',
+    component: TronscanAPI
+  },
+  {
+    path: '/djedapi',
+    name: 'DjedAPI',
+    component: DjedAPI
+  }
+]
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
+const router = new VueRouter({
+  routes
 })
+
+export default router

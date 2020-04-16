@@ -1,23 +1,79 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'App'
-}
-</script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+    <div id="app">
+      <el-container style="width:1140px;position:absolute;margin: auto; left:0; top:0; right:0; bottom:0; border: 1px solid #eee">
+    <el-header style="font-size:12px;height:80px;line-height:80px;border-bottom: 1px solid #dcdfe6">
+        <el-dropdown>
+          <i class="el-icon-setting" style="margin-right: 15px"></i>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>查看</el-dropdown-item>
+            <el-dropdown-item>新增</el-dropdown-item>
+            <el-dropdown-item>删除</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <span>TEST</span>
+      </el-header>
+     <el-container>
+      <el-aside width="200px" style="background-color: #fff;border-bottom: 1px solid #dcdfe6">
+      <el-menu :router="true" active-text-color="#42b983" style="margin-top:20px">
+        <router-link to="/">
+        <el-menu-item index="1">
+          <i class="el-icon-menu"></i>
+          <span slot="title">整体结果</span>
+        </el-menu-item>
+        </router-link>
+        <el-submenu index="2">  
+          <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/tronscan.png">TRONSCAN</template>
+          <el-menu-item-group>
+             <el-menu-item index="/tronscanui">TRONSCAN UI</el-menu-item>
+             <el-menu-item index="/tronscanapi">TRONSCAN API</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+  
+        <el-submenu index="3">  
+          <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/tronlink.png">TRONLINK</template>
+          <el-menu-item-group>
+             <el-menu-item index="/tronlinkui">TRONLINK UI</el-menu-item>
+             <el-menu-item index="/tronlinkapi">TRONLINK API</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+  
+        <el-submenu index="4">  
+          <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/djed.png">DJED</template>
+          <el-menu-item-group>
+             <el-menu-item index="/djedui">DJED UI</el-menu-item>
+             <el-menu-item index="/djedapi">DJED API</el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
+      </el-menu>
+      </el-aside>
+      
+      <el-main>
+        <router-link to="/"></router-link>
+   <router-view/>
+      </el-main>
+    </el-container>
+  </el-container>
+  
+    </div>
+  </template>
+  
+  <script>
+  
+  </script>
+  
+  <style>
+    *{
+      text-decoration: none;
+    }
+  
+    .el-header {
+      background-color: #fff;
+      color: #333;
+      line-height: 60px;
+    }
+    
+    .el-aside {
+      color: #333;
+    }
+  </style>
+  
