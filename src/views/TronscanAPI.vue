@@ -20,7 +20,11 @@
       </el-table>  
       </div>
 </template>
-<style scoped>
+<style >
+.el-tooltip__popper{
+  max-width:40%;  
+  }
+
 .el-table .warning-row {
     background: #F56C6C;
   }

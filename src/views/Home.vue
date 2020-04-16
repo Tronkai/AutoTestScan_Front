@@ -4,11 +4,11 @@
 <el-col :span="12">
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
-    <img style="width:18px;height:18px;margin-right:8px;margin-right:8px" src="../assets/tronscan.png"><span>TRONSCAN UI</span>
+    <img style="width:18px;height:18px;margin-right:8px;margin-right:8px" src="../assets/tronscan.png"><span>TRONSCAN API</span>
     <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronscanapi" :key = "item" class="text item">
-    <el-progress type="circle" :percentage="Math.ceil(tronscanapi[0].sucessnum/tronscanapi[0].sum*100)"></el-progress></div>
+    <el-progress type="circle" :color="tronscanapi[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(tronscanapi[0].sucessnum/tronscanapi[0].sum*100)"></el-progress></div>
   </div>
   <div style="float: left;margin-left:30px;margin-top:30px">
           <span >成功用例数:{{tronscanapi[0].sucessnum}}</span>
@@ -22,11 +22,11 @@
 <el-col :span="12">
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
-    <img style="width:18px;height:18px;margin-right:8px;margin-right:8px" src="../assets/tronscan.png"><span>TRONSCAN API</span>
+    <img style="width:18px;height:18px;margin-right:8px;margin-right:8px" src="../assets/tronscan.png"><span>TRONSCAN UI</span>
     <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronscanui" :key = "item" class="text item">
-    <el-progress type="circle" :percentage="Math.ceil(tronscanui[0].sucessnum/tronscanui[0].sum*100)"></el-progress></div>
+    <el-progress type="circle" :color="tronscanui[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(tronscanui[0].sucessnum/tronscanui[0].sum*100)"></el-progress></div>
   </div>
   <div style="float: left;margin-left:30px;margin-top:30px">
           <span >成功用例数:{{tronscanui[0].sucessnum}}</span>
@@ -80,7 +80,7 @@
     <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in djedapi" :key = "item" class="text item">
-    <el-progress type="circle" :percentage="Math.ceil(djedapi[0].sucessnum/djedapi[0].sum*100)"></el-progress></div>
+    <el-progress type="circle" :color="djedapi[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(djedapi[0].sucessnum/djedapi[0].sum*100)"></el-progress></div>
   </div>
   <div style="float: left;margin-left:30px;margin-top:30px">
           <span >成功用例数:{{djedapi[0].sucessnum}}</span>
