@@ -1,20 +1,9 @@
 <template>
     <div id="app">
       <el-container style="width:1140px;position:absolute;margin: auto; left:0; top:0; right:0; bottom:0; border: 1px solid #eee">
-    <el-header style="font-size:12px;height:80px;line-height:80px;border-bottom: 1px solid #dcdfe6">
-        <el-dropdown>
-          <i class="el-icon-setting" style="margin-right: 15px"></i>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>查看</el-dropdown-item>
-            <el-dropdown-item>新增</el-dropdown-item>
-            <el-dropdown-item>删除</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <span>TEST</span>
-      </el-header>
      <el-container>
       <el-aside width="200px" style="background-color: #fff;border-bottom: 1px solid #dcdfe6">
-      <el-menu :router="true" active-text-color="#42b983" style="margin-top:20px">
+      <el-menu :default-openeds="['2','3','4']" :router="true"  active-text-color="#42b983" style="margin-top:20px;border-right: solid 0px #e6e6e6;">
         <router-link to="/">
         <el-menu-item index="1">
           <i class="el-icon-menu"></i>
@@ -46,11 +35,13 @@
         </el-submenu>
       </el-menu>
       </el-aside>
+      <el-container>
       
       <el-main>
         <router-link to="/"></router-link>
    <router-view/>
       </el-main>
+      </el-container>
     </el-container>
   </el-container>
   
@@ -67,12 +58,13 @@
     }
   
     .el-header {
-      background-color: #fff;
+      background-color: #B3C0D1;
       color: #333;
       line-height: 60px;
     }
     
     .el-aside {
+      background-color: #D3DCE6;
       color: #333;
     }
   </style>
