@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import TronscanUI from '../views/TronscanUI.vue'
 import TronscanAPI from '../views/TronscanAPI.vue'
 import DjedAPI from '../views/DjedAPI.vue'
+import Scan from '../views/Scan.vue'
+import Login from '../components/Login.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -11,6 +13,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/scan',
+    name: 'Scan',
+    component: Scan
   },
   {
     path: '/tronscanui',
@@ -26,6 +33,11 @@ const routes = [
     path: '/djedapi',
     name: 'DjedAPI',
     component: DjedAPI
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   }
 ]
 

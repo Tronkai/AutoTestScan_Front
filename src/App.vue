@@ -1,5 +1,7 @@
 <template>
     <div id="app">
+            
+
       <el-container style="width:1140px;position:absolute;margin: auto; left:0; top:0; right:0; bottom:0; border: 1px solid #eee">
      <el-container>
       <el-aside width="200px" style="background-color: #fff;border-bottom: 1px solid #dcdfe6">
@@ -39,8 +41,8 @@
       
       <el-main>
         <router-link to="/"></router-link>
-   <router-view/>
-      </el-main>
+     <router-view></router-view> 
+</el-main>
       </el-container>
     </el-container>
   </el-container>
@@ -52,7 +54,7 @@
   
   </script>
   
-  <style>
+  <style scope>
     *{
       text-decoration: none;
     }
