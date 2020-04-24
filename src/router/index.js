@@ -3,7 +3,10 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import TronscanUI from '../views/TronscanUI.vue'
 import TronscanAPI from '../views/TronscanAPI.vue'
+import TronlinkAPI from '../views/TronlinkAPI.vue'
+import TronlinkUI from '../views/TronlinkUI.vue'
 import DjedAPI from '../views/DjedAPI.vue'
+import DjedUI from '../views/DjedUI.vue'
 import Scan from '../views/Scan.vue'
 import Login from '../components/Login.vue'
 Vue.use(VueRouter)
@@ -33,6 +36,21 @@ const routes = [
     path: '/djedapi',
     name: 'DjedAPI',
     component: DjedAPI
+  },
+  {
+    path: '/djedui',
+    name: 'DjedUI',
+    component: DjedUI
+  },
+  {
+    path: '/tronlinkAPI',
+    name: 'TronlinkAPI',
+    component: TronlinkAPI
+  },
+  {
+    path: '/tronlinkui',
+    name: 'TronlinkUI',
+    component: TronlinkUI
   },
   {
     path: '/login',

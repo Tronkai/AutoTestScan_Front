@@ -6,7 +6,7 @@
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
     <img style="width:18px;height:18px;margin-right:8px;margin-right:8px" src="../assets/tronscan.png"><span>TRONSCAN API</span>
-    <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+    <router-link to="/tronscanapi"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronscanapi" :key = "item" class="text item">
     <el-progress  type="circle" :color="tronscanapi[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(tronscanapi[0].sucessnum/tronscanapi[0].sum*100)"></el-progress>
@@ -23,11 +23,11 @@
 
   <div style="float: left;margin-left:30px;margin-top:15px">
                 <h4>当天执行情况</h4>
-                <span>总执行次数：{{tronscanuiToday.todaysum}}次</span>
+                <span>总执行次数：{{tronscanapiToday.todaysum}}次</span>
                       <br><br>
-                <span>总成功次数：{{tronscanuiToday.todaysucess}}次</span>
+                <span>总成功次数：{{tronscanapiToday.todaysucess}}次</span>
                       <br><br>
-                <span>总失败次数：{{tronscanuiToday.todayfail}}次</span>
+                <span>总失败次数：{{tronscanapiToday.todayfail}}次</span>
   </div>
   <div>
   </div>
@@ -39,7 +39,7 @@
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
     <img style="width:18px;height:18px;margin-right:8px;margin-right:8px" src="../assets/tronscan.png"><span>TRONSCAN UI</span>
-    <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+    <router-link to="/tronscanui"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>
   </div>
   <div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronscanui" :key = "item" class="text item">
@@ -58,11 +58,11 @@
     <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>
   <div style="float: left;margin-left:30px;margin-top:30px">
   <h4>当天执行情况</h4>
-                <span>总执行次数：{{tronscanapiToday.todaysum}}次</span>
+                <span>总执行次数：{{tronscanuiToday.todaysum}}次</span>
                       <br><br>
-                <span>总成功次数：{{tronscanapiToday.todaysucess}}次</span>
+                <span>总成功次数：{{tronscanuiToday.todaysucess}}次</span>
                       <br><br>
-                <span>总失败次数：{{tronscanapiToday.todayfail}}次</span>
+                <span>总失败次数：{{tronscanuiToday.todayfail}}次</span>
   </div>
   <div>
   </div>
@@ -71,13 +71,13 @@
 
 
 <el-col :span="12">
-    <el-card class="box-card" shadow="hover">
+    <el-card v-show="tronlinkui[0]" class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
     <img style="width:18px;height:18px;margin-right:8px" src="../assets/tronlink.png"><span>TRONLINK UI</span>
-    <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+    <router-link to="/tronlinkui"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronlinkui" :key = "item" class="text item">
-    <el-progress type="circle" :color="tronscanapi[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(tronlinkui[0].sucessnum/tronlinkui[0].sum*100)"></el-progress>
+    <el-progress type="circle" :color="tronlinkui[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(tronlinkui[0].sucessnum/tronlinkui[0].sum*100)"></el-progress>
   <div style="margin-left:7px;margin-top:10px;margin-bottom:-30px">
       <span>最近一次执行情况</span>
       <br>
@@ -108,7 +108,7 @@
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
     <img style="width:18px;height:18px;margin-right:8px" src="../assets/tronlink.png"><span>TRONLINK API</span>
-    <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+    <router-link to="/tronlinkapi"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronlinkapi" :key = "item" class="text item">
     <el-progress type="circle" :color="tronlinkapi[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(tronlinkapi[0].sucessnum/tronlinkapi[0].sum*100)"></el-progress>
@@ -139,7 +139,7 @@
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
     <img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png"><span>DJED API</span>
-    <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+    <router-link to="/djedapi"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in djedapi" :key = "item" class="text item">
     <el-progress type="circle" :color="djedapi[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(djedapi[0].sucessnum/djedapi[0].sum*100)"></el-progress>
@@ -168,11 +168,11 @@
   </el-col>
 
 
-<el-col :span="12">
+<!-- <el-col v-show="djedui[0]" :span="12">
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
     <img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png"><span>DJED UI</span>
-    <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+    <router-link to="/djedui"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in djedui" :key = "item" class="text item">
     <el-progress type="circle" :color="djedui[0].status == '1'?'#5cb87a':'#f56c6c'"  :percentage="Math.ceil(djedui[0].sucessnum/djedui[0].sum*100)"></el-progress>
@@ -198,7 +198,7 @@
   <div>
   </div>
 </el-card>
-  </el-col>
+  </el-col> -->
 
 
 </el-row>
