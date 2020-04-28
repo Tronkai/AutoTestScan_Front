@@ -44,7 +44,13 @@ export default {
                 this.$axios.post("/login",this.loginForm).
                     then(res=>{
                         console.log(res);
-                        return this.$notify({title: '成功',message: '这是一条成功的提示消息',type: 'success'})
+                        if(res.data.status == 0){
+                            return this.$notify({title: '成功',message: '登录成功',type: 'success'})
+                        }else if(res.data.status == 2){
+                            return this.$notify({title: '失败',message: '密码错误',type: 'error'})
+                        }else if(res.data.status == 1){
+                            return this.$notify({title: '失败',message: '用户不存在',type: 'error'})
+                        }
                         })
             })
         }
