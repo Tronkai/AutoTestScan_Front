@@ -9,7 +9,7 @@
   <el-col :span="6"><div class="grid-content bg-purple-light"><el-menu :default-openeds="['1']" style="bottom:-13px" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1"><router-link to="/scan">处理中心</router-link></el-menu-item>
   <el-menu-item index="2">订单管理</el-menu-item>
-  <el-menu-item @click="dialogVisible = true" index="3">订单管理</el-menu-item>
+  <el-menu-item @click="isdia" index="3">订单管理</el-menu-item>
 </el-menu>
 </div></el-col>
 </el-row>
@@ -64,6 +64,14 @@ export default {
     methods: {
         resetForm(){
             this.$refs.loginFormRef.resetFields();
+        },
+        isdia(){
+            if (window.sessionStorage.getItem('token')){
+                this.$router.push("/scan");
+                return this.dialogVisible = false;
+            }else{
+                return this.dialogVisible = true;
+            }
         },
         login(){
             this.$refs.loginFormRef.validate(vail => {
