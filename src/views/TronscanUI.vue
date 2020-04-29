@@ -20,7 +20,7 @@
       </el-table>  
       </div>
 </template>
-<style >
+<style scoped>
 .el-table .warning-row {
     background: #F56C6C;
   }

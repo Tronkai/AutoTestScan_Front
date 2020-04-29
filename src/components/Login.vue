@@ -1,6 +1,9 @@
 <template>
     <div class="login_container">
         <div class="login_box">
+            <div class="avator_box">
+                <img id="img" src="../assets/tronscan.png" alt="">
+            </div>
             <el-form ref="loginFormRef" :rules="rules" :model="loginForm" class="login_form" label-width="0px">
             <el-form-item prop="username">
             <el-input v-model="loginForm.username" prefix-icon="el-icon-user" clearable></el-input>
@@ -20,7 +23,8 @@
 
 
 
-<script>
+
+<script scope>
 export default {
     data() {
         return {
@@ -44,7 +48,15 @@ export default {
                 this.$axios.post("/login",this.loginForm).
                     then(res=>{
                         console.log(res);
-                        return this.$notify({title: '成功',message: '这是一条成功的提示消息',type: 'success'})
+                        if(res.data.status == 0){
+                            window.sessionStorage.setItem('token',res.data.token);
+                            this.$router.push("/scan")
+                            return this.$notify({title: '成功',message: '登录成功',type: 'success'})
+                        }else if(res.data.status == 2){
+                            return this.$notify({title: '失败',message: '密码错误',type: 'error'})
+                        }else if(res.data.status == 1){
+                            return this.$notify({title: '失败',message: '用户不存在',type: 'error'})
+                        }
                         })
             })
         }
@@ -56,13 +68,34 @@ export default {
 
 
 
-<style  scoped>
-
+<style scope>
+html,body {
+    margin: 0px;
+}
 .login_container {
     background-color: bisque;
-    height: 100%;
+    height: 100vh;
 }
 
+.avator_box {
+    position: absolute;
+    height: 130px;
+    width: 130px;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 0 0 10px #eee;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: white;
+
+}
+#img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-color: #eee;
+    }
 .login_box {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     width: 450px;

@@ -20,7 +20,7 @@
       </el-table>  
       </div>
 </template>
-<style >
+<style>
 .el-tooltip__popper{
   max-width:40%;  
   }
