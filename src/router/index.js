@@ -8,8 +8,8 @@ import TronlinkUI from '../views/TronlinkUI.vue'
 import DjedAPI from '../views/DjedAPI.vue'
 import DjedUI from '../views/DjedUI.vue'
 import Scan from '../views/Scan.vue'
-import Login from '../components/Login.vue'
-import LoginD from '../components/Login_Dialog.vue'
+// import Login from '../components/Login.vue'
+// import LoginD from '../components/Login_Dialog.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -53,32 +53,35 @@ const routes = [
     ]
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login
+    path: '/',
+    name: 'Home',
+    component: Home
   },
-  {
-    path: '/loginD',
-    name: 'LoginD',
-    component: LoginD
-  }
+  // {
+  //   path: '/loginD',
+  //   name: 'LoginD',
+  //   component: LoginD
+  // }
 ]
 
 const router = new VueRouter({
   routes
 })
-
-router.beforeEach((to,from,next) => {
-  if(to.path == '/login' && !window.sessionStorage.getItem("token")) return next();
-  else if(to.path == '/login' && window.sessionStorage.getItem("token")){
-    return next('/scan');
-  }
-  else if(window.sessionStorage.getItem("token")) {
-    return next();
-  }
-  else {
-    return next('/login');
-  }
-})
+// router.beforeEach((to,from,next) => {
+//     if(to.path == '/' ) return next('/home');
+    
+//   })
+// router.beforeEach((to,from,next) => {
+//   if(to.path == '/login' && !window.sessionStorage.getItem("token")) return next();
+//   else if(to.path == '/login' && window.sessionStorage.getItem("token")){
+//     return next('/scan');
+//   }
+//   else if(window.sessionStorage.getItem("token")) {
+//     return next();
+//   }
+//   else {
+//     return next('/login');
+//   }
+// })
 
 export default router

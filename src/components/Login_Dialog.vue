@@ -34,7 +34,7 @@
 
 
 
-<script scope>
+<script>
 export default {
     data() {
         return {
