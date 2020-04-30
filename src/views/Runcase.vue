@@ -36,6 +36,9 @@
     *{
       text-decoration: none;
     }
+    .el-container {
+      border : 0px solid #fff !important;
+    }
   
     .el-header {
       border-bottom: 2px solid #eee;
