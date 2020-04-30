@@ -6,10 +6,11 @@
           <el-header height="75px" style="width:1200px;margin: auto; left:0; top:0; right:0; bottom:0; border-left: solid 0px #e6e6e6">
             <el-row type="flex" class="row-bg">
   <el-col :span="6"><div class="grid-content bg-purple"><img style="width:170px;height:40px;margin-top:20px;margin-left:-10px" src="./assets/logo5.png"></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple-light"><el-menu :default-openeds="['1']" style="bottom:-13px" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="1"><router-link to="/scan">处理中心</router-link></el-menu-item>
-  <el-menu-item index="2">订单管理</el-menu-item>
-  <el-menu-item @click="isdia" index="3">订单管理</el-menu-item>
+  <el-col style="margin-left:350px" :span="26"><div class="grid-content bg-purple-light"><el-menu text-color="#000"
+  active-text-color="#42B983" :default-openeds="['1']" style="bottom:-13px;" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+  <el-menu-item index="1" style="font-size:18px"><router-link to="/scan">执行结果</router-link></el-menu-item>
+  <el-menu-item @click="isdiaRun" index="2" style="font-size:18px">手动执行</el-menu-item>
+  <el-menu-item @click="isdia" index="3" style="font-size:18px">测试报告</el-menu-item>
 </el-menu>
 </div></el-col>
 </el-row>
@@ -65,9 +66,9 @@ export default {
         resetForm(){
             this.$refs.loginFormRef.resetFields();
         },
-        isdia(){
+        isdiaRun(){
             if (window.sessionStorage.getItem('token')){
-                this.$router.push("/scan");
+                this.$router.push("/runcase");
                 return this.dialogVisible = false;
             }else{
                 return this.dialogVisible = true;

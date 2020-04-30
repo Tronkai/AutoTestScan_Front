@@ -8,6 +8,11 @@ import TronlinkUI from '../views/TronlinkUI.vue'
 import DjedAPI from '../views/DjedAPI.vue'
 import DjedUI from '../views/DjedUI.vue'
 import Scan from '../views/Scan.vue'
+import Runcase from '../views/Runcase.vue'
+import Report from '../views/Report.vue'
+import Runtronscanui from '../views/RunTronscanUI.vue'
+
+
 // import Login from '../components/Login.vue'
 // import LoginD from '../components/Login_Dialog.vue'
 Vue.use(VueRouter)
@@ -56,6 +61,31 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  
+  {
+    path: '/report',
+    name: 'Report',
+    component: Report,
+    children :[
+      {
+        path: '/runtronscanui',
+        name: 'Runtronscanui',
+        component: Runtronscanui
+      }
+    ]
+  },
+  {
+    path: '/runcase',
+    name: 'Runcase',
+    component: Runcase,
+    children :[
+      {
+        path: '/runtronscanui',
+        name: 'Runtronscanui',
+        component: Runtronscanui
+      }
+    ]
   },
   // {
   //   path: '/loginD',
