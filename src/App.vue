@@ -83,6 +83,7 @@ export default {
                         if(res.data.status == 0){
                             this.dialogVisible = false;
                             window.sessionStorage.setItem('token',res.data.token);
+                            window.sessionStorage.setItem('username',res.data.username);
                             this.$router.push("/runcase")
                             return this.$notify({title: '成功',message: '登录成功',type: 'success'})
                         }else if(res.data.status == 2){

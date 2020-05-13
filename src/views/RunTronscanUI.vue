@@ -23,7 +23,7 @@
   </el-select>
         </div>
         <div style="margin-top:25px">
-          <el-button  type="primary">执行用例</el-button>
+          <el-button @click="runTronscanUI"  type="primary">执行用例</el-button>
         </div>
       </div>
 </template>
@@ -60,6 +60,15 @@
         value: '',
         value1: ''
       }
+    },
+    methods:{
+      runTronscanUI(){
+        this.$axios.get("/tronlinkapi")
+        .then(res=>{
+          console.log(res);
+          this.items = res.data;
+        })
+      },
     }
   }
 </script>
