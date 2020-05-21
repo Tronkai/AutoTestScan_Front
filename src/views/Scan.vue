@@ -73,8 +73,8 @@
 <el-col :span="12">
     <el-card v-show="tronlinkui[0]" class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
-    <img style="width:18px;height:18px;margin-right:8px" src="../assets/tronlink.png"><span>TRONLINK UI</span>
-    <router-link to="/tronlinkui"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>
+    <img style="width:18px;height:18px;margin-right:8px" src="../assets/trongrid.png"><span>TRONGRID API</span>
+    <router-link to="/trongridapi"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronlinkui" :key = "item" class="text item">
     <el-progress type="circle" :color="tronlinkui[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(tronlinkui[0].sucessnum/tronlinkui[0].sum*100)"></el-progress>
@@ -253,7 +253,7 @@
           console.log(res);
           this.tronscanapi = res.data;
         }),
-        this.$axios.get("/tronlinkui/lastest")
+        this.$axios.get("/trongridapi/lastest")
         .then(res=>{
           console.log(res);
           this.tronlinkui = res.data;
@@ -285,7 +285,7 @@
           console.log(res);
           this.tronscanapiToday = res.data;
         }),
-        this.$axios.get("/tronlinkui/today")
+        this.$axios.get("/trongridapi/today")
         .then(res=>{
           console.log(res);
           this.tronlinkuiToday = res.data;

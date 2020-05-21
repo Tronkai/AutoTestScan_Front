@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import TronscanUI from '../views/TronscanUI.vue'
 import TronscanAPI from '../views/TronscanAPI.vue'
 import TronlinkAPI from '../views/TronlinkAPI.vue'
-import TronlinkUI from '../views/TronlinkUI.vue'
+import TronlinkUI from '../views/TrongridAPI.vue'
 import DjedAPI from '../views/DjedAPI.vue'
 import DjedUI from '../views/DjedUI.vue'
 import Scan from '../views/Scan.vue'
@@ -51,8 +51,8 @@ const routes = [
         component: TronlinkAPI
       },
       {
-        path: '/tronlinkui',
-        name: 'TronlinkUI',
+        path: '/trongridapi',
+        name: 'TrongridAPI',
         component: TronlinkUI
       },
     ]

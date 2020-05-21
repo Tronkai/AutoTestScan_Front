@@ -40,6 +40,7 @@
   export default {
     data() {
       return {
+        timer:0,
         options: [{
           value: '选项1',
           label: '44.2.33.123'
@@ -63,12 +64,30 @@
     },
     methods:{
       runTronscanUI(){
-        this.$axios.get("/tronlinkapi")
+        this.$axios.get("/tronscanui/jobqueue")
         .then(res=>{
           console.log(res);
-          this.items = res.data;
         })
-      },
-    }
-  }
+        this.$axios.get("/tronscanui/run")
+        .then(res=>{
+          console.log(res);
+        })
+     },
+    },
+    mounted(){    
+    if(this.timer){      
+        clearInterval(this.timer)    
+    }else{      
+        this.timer = setInterval(()=>{  
+          this.$axios.get("/tronscanui/jobqueue")
+        .then(res=>{
+          console.log(res);
+        })
+        },3000)    
+    }  
+},  
+destroyed(){    
+    clearInterval(this.timer)  
+},
+}
 </script>

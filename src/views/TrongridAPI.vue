@@ -1,5 +1,5 @@
 <template>
-  <div class="tronlinkui">
+  <div class="trongridapi">
 <el-table :data="items" :row-class-name="tableRowClassName">
        <el-table-column fixed prop="time" :formatter="test2" label="日期" width="140">
         </el-table-column>
@@ -38,7 +38,7 @@
     },
     methods:{
       getList(){
-        this.$axios.get("/tronlinkui")
+        this.$axios.get("/trongridapi")
         .then(res=>{
           console.log(res);
           this.items = res.data;
