@@ -167,8 +167,10 @@
 </el-card>
   </el-col>
 
+  
 
-<!-- <el-col v-show="djedui[0]" :span="12">
+
+ <el-col v-show="djedui[0]" :span="12">
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
     <img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png"><span>DJED UI</span>
@@ -198,7 +200,7 @@
   <div>
   </div>
 </el-card>
-  </el-col> -->
+  </el-col> 
 
 
 </el-row>
