@@ -1,8 +1,6 @@
 <template>
     <div id="app">
-      <div class="header">
-        <el-container  style="height: 100vn;border: 1px solid #eee">
-  <el-container>
+        <el-container  style="weight:100vn;border: 1px solid #eee">
           <el-header height="80px" style="width:1200px;margin: auto; left:0; top:0; right:0; bottom:0; border-left: solid 0px #e6e6e6">
             <el-row type="flex" class="row-bg">
   <el-col :span="6"><div class="grid-content bg-purple"><img style="width:170px;height:65px;margin-top:8px;margin-left:-10px" src="./assets/logo6.png"></div></el-col>
@@ -18,11 +16,10 @@
 </el-row>
   </el-header>
     <el-main>
-      <router-view></router-view>
+        <Scan style="width:1200px;margin: auto; left:0; top:0; right:0; bottom:0; border-left: solid 0px #e6e6e6"></Scan>
+    <router-view></router-view>
     </el-main>
-  </el-container>
     </el-container>
-    </div>
     <el-dialog
   :visible.sync="dialogVisible"
   width="0%"
@@ -50,9 +47,12 @@
   </template>
   
 <script>
+import Scan from './views/Scan.vue'
 export default {
+    components: {Scan},
     data() {
         return {
+            clientHeight:'',
             dialogVisible: false,
             loginForm : {
                 username:"",
@@ -65,6 +65,7 @@ export default {
         }
     },
     methods: {
+        
         resetForm(){
             this.$refs.loginFormRef.resetFields();
         },

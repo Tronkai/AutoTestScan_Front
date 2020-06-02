@@ -98,7 +98,7 @@ const router = new VueRouter({
   routes
 })
 // router.beforeEach((to,from,next) => {
-//     if(to.path == '/' ) return next('/home');
+//     if(to.path == '/scan' ) return next('/tronscanui');
 //   })
 // router.beforeEach((to,from,next) => {
 //   if(to.path == '/login' && !window.sessionStorage.getItem("token")) return next();
