@@ -27,10 +27,10 @@
         </el-submenu>
   
         <el-submenu index="4">  
-          <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png">DJED</template>
+          <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png">JUST</template>
           <el-menu-item-group>
-             <el-menu-item index="/djedui">DJED UI</el-menu-item>
-             <el-menu-item index="/djedapi">DJED API</el-menu-item>
+             <el-menu-item index="/djedui">JUST UI</el-menu-item>
+             <el-menu-item index="/djedapi">JUST API</el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 

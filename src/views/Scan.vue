@@ -138,7 +138,7 @@
   <el-col :span="12">
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
-    <img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png"><span>DJED API</span>
+    <img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png"><span>JUST API</span>
     <router-link to="/djedapi"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in djedapi" :key = "item" class="text item">
@@ -173,7 +173,7 @@
  <el-col v-show="djedui[0]" :span="12">
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
-    <img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png"><span>DJED UI</span>
+    <img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png"><span>JUST UI</span>
     <router-link to="/djedui"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in djedui" :key = "item" class="text item">
