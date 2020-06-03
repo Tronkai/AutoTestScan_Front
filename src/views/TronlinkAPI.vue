@@ -69,6 +69,7 @@
     },
     mounted:function(){
       this.getList();
+      this.getList();
     }
   };
 </script>

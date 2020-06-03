@@ -54,10 +54,12 @@
                 return ret;
       },
       test: function (row, column, cellValue) {
-                return cellValue.substring(11,19);
+        var t1 = cellValue.substring(11,19);
+                return t1;
       },
       test2: function (row, column, cellValue) {
-                return cellValue.substring(0,10);
+        var t2 = cellValue.substring(0,10);
+                return t2;
       },
       tableRowClassName({ row }) {
       if (row.status ==2) {
@@ -68,6 +70,7 @@
     }
     },
     mounted:function(){
+      this.getList();
       this.getList();
     }
   };

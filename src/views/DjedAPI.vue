@@ -1,7 +1,7 @@
 <template>
   <div class="djedapi">
 <el-table :data="items" :row-class-name="tableRowClassName">
-       <el-table-column fixed prop="time" :formatter="test2" label="日期" width="140">
+       <el-table-column  fixed prop="time" :formatter="test2" label="日期" width="140">
         </el-table-column>
         <el-table-column prop="time" :formatter="test" label="时间" >
         </el-table-column>
@@ -68,7 +68,8 @@
     }
     },
     mounted:function(){
-      this.getList();
+      this.getList(); 
+      this.getList(); 
     }
   };
 </script>

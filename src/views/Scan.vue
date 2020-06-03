@@ -362,7 +362,7 @@ import DjedUI from '../views/DjedUI.vue'
           console.log(res);
           this.djeduiToday = res.data;
         })
-      }
+      },
     },
     mounted:function(){
       this.getList();
