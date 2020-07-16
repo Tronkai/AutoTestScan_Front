@@ -218,6 +218,42 @@
   </el-col> 
 
 
+   <el-col v-show="tronweb[0]" :span="12">
+    <el-card class="box-card" shadow="hover">
+      <div slot="header" class="clearfix">
+    <img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png"><span>TRONWEB API</span>
+<el-button style="float: right; padding: 3px 0" type="text" @click="TronwebAPIdialog = true">查看详情</el-button>
+  </div>
+      <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronwebapi" :key = "item" class="text item">
+    <el-progress style="margin-top:25px;margin-bottom:20px" type="circle" :color="tronwebapi[0].status == '1'?'#5cb87a':'#f56c6c'"  :percentage="Math.ceil(tronwebapi[0].sucessnum/tronwebapi[0].sum*100)"></el-progress>
+  
+    </div>
+  </div>
+      <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>
+    
+  <div style="float: left;margin-left:30px;margin-top:30px">
+          <h4>最近一次执行情况</h4>
+      <span>成功用例数:{{tronwebapi[0].sucessnum}}</span>
+                      <br><br>
+      <span>失败用例数:{{tronwebapi[0].failnum}}</span>
+                      <br><br>
+  </div>
+  <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>
+    
+  <div style="float: left;margin-left:30px;margin-top:30px">
+          <h4>当天执行情况</h4>
+                <span>总执行次数：{{tronwebapiToday.todaysum}}次</span>
+                      <br><br>
+                <span>总成功次数：{{tronwebapiToday.todaysucess}}次</span>
+                      <br><br>
+                <span>总失败次数：{{tronwebapiToday.todayfail}}次</span>
+  </div>
+  <div>
+  </div>
+</el-card>
+  </el-col> 
+
+
 </el-row>
 <el-dialog width="70%" title="TRONSCAN UI 最近30次执行结果" :visible.sync="TronscanUIdialog">
   <TronscanUI></TronscanUI>
@@ -241,6 +277,10 @@
 
 <el-dialog width="70%" title="JUST UI 最近30次执行结果" :visible.sync="JustUIdialog">
   <DjedUI></DjedUI>
+</el-dialog> 
+
+<el-dialog width="70%" title="JUST UI 最近30次执行结果" :visible.sync="TronwebAPIdialog">
+  <TronwebAPI></TronwebAPI>
 </el-dialog> 
 
 
@@ -272,16 +312,18 @@ import TronlinkAPI from '../views/TronlinkAPI.vue'
 import TrongridAPI from '../views/TrongridAPI.vue'
 import DjedAPI from '../views/DjedAPI.vue'
 import DjedUI from '../views/DjedUI.vue'
+import TronwebAPI from '../views/TronwebAPI.vue'
 
   export default {
-    components: {TronscanUI,TronscanAPI,TronlinkAPI,TrongridAPI,DjedAPI,DjedUI},
+    components: {TronscanUI,TronscanAPI,TronlinkAPI,TrongridAPI,DjedAPI,DjedUI,TronwebAPI},
     data() {
       return {
         TronscanUIdialog : false,
         TronscanAPIdialog : false,
         TronlinkAPIdialog : false,
         JustUIdialog : false,    
-        JustAPIdialog : false,    
+        JustAPIdialog : false,  
+        TronwebAPIdialog : false,      
         TronGridAPIdialog : false,                    
         tronscanui :[{}],
         tronscanapi :[{}],
@@ -289,12 +331,14 @@ import DjedUI from '../views/DjedUI.vue'
         tronlinkapi :[{}],
         djedapi :[{}],
         djedui :[{}],
+        tronwebapi :[{}],
         tronscanuiToday :[{}],
         tronscanapiToday :[{}],
         tronlinkuiToday :[{}],
         tronlinkapiToday :[{}],
         djedapiToday :[{}],
         djeduiToday :[{}],
+        tronwebapiToday :[{}]
       
       }
     },
@@ -316,6 +360,11 @@ import DjedUI from '../views/DjedUI.vue'
           this.tronlinkui = res.data;
         }),
         this.$axios.get("/tronlinkapi/lastest")
+        .then(res=>{
+          console.log(res);
+          this.tronlinkapi = res.data;
+        }),
+        this.$axios.get("/tronwebapi/lastest")
         .then(res=>{
           console.log(res);
           this.tronlinkapi = res.data;
@@ -343,6 +392,11 @@ import DjedUI from '../views/DjedUI.vue'
           this.tronscanapiToday = res.data;
         }),
         this.$axios.get("/trongridapi/today")
+        .then(res=>{
+          console.log(res);
+          this.tronlinkuiToday = res.data;
+        }),
+        this.$axios.get("/tronwebapi/today")
         .then(res=>{
           console.log(res);
           this.tronlinkuiToday = res.data;
