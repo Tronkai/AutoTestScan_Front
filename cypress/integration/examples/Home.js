@@ -6,7 +6,10 @@ describe('Tronscan首页', () => {
         cy.get('.table > tbody > :nth-child(3) > td').invoke('text').then(value => {
             a = value
             cy.url().should('include','/block/'+a)
-            cy.url().should('include','/blocks/')
+            cy.url().should('include','/block/'+a)
+            cy.url().should('include','/block/'+a)
+            cy.url().should('include','/block/'+a)
+
         })
     })
 })
