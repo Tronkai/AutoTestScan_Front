@@ -1,0 +1,47 @@
+Index: cypress/integration/examples/Home.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>describe('Tronscan首页', () => {\n    it('上边栏数据校验!', () => {\n        cy.visit('https://tronscan.org')\n        cy.get(':nth-child(1) > :nth-child(1) > .hash-body > .text-left > .produced-by > .ml-2').click()\n        let a\n        cy.get('.table > tbody > :nth-child(3) > td').invoke('text').then(value => {\n            a = value\n            cy.url().should('include','/block/'+a)\n            cy.url().should('include','/block/'+a)\n            cy.url().should('include','/block/'+a)\n            cy.url().should('include','/block/'+a)\n\n        })\n    })\n})
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cypress/integration/examples/Home.js b/cypress/integration/examples/Home.js
+--- a/cypress/integration/examples/Home.js	(revision 39f088fb69f784a3bcc0df1b64d71b66f9e2901d)
++++ b/cypress/integration/examples/Home.js	(date 1606815320795)
+@@ -6,10 +6,7 @@
+         cy.get('.table > tbody > :nth-child(3) > td').invoke('text').then(value => {
+             a = value
+             cy.url().should('include','/block/'+a)
+-            cy.url().should('include','/block/'+a)
+-            cy.url().should('include','/block/'+a)
+-            cy.url().should('include','/block/'+a)
+-
++            cy.url().should('include','/blocks/')
+         })
+     })
+ })
+\ No newline at end of file
+Index: cypress/integration/examples/Token.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cypress/integration/examples/Token.js b/cypress/integration/examples/Token.js
+new file mode 100644
+--- /dev/null	(date 1606891535996)
++++ b/cypress/integration/examples/Token.js	(date 1606891535996)
+@@ -0,0 +1,13 @@
++describe('tokens/list',function() {
++    it('通证概览', function () {
++        cy.visit('https://tronscan.io/#/tokens/list')
++        cy.get('[data-row-key="0"] > :nth-child(4) > .col-red').invoke('text').then( price =>{
++            expect(price).is.not.empty
++            cy.get('.redPrice > span').invoke('text').then(pri => {
++                expect(pri.slice(1,7)).to.equal(price)
++            })
++            })
++        cy.get('.token-list-action > div > [href="#/token/1002000"]').click()
++
++    })
++})
+\ No newline at end of file

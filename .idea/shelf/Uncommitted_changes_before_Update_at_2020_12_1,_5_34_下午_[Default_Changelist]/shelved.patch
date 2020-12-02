@@ -1,0 +1,22 @@
+Index: cypress/integration/examples/Home.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>describe('Tronscan首页', () => {\n    it('上边栏数据校验!', () => {\n        cy.visit('https://tronscan.org')\n        cy.get(':nth-child(1) > :nth-child(1) > .hash-body > .text-left > .produced-by > .ml-2').click()\n        let a\n        cy.get('.table > tbody > :nth-child(3) > td').invoke('text').then(value => {\n            a = value\n            cy.url().should('include','/block/'+a)\n            cy.url().should('include','/blocks/')\n        })\n    })\n})
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/cypress/integration/examples/Home.js b/cypress/integration/examples/Home.js
+--- a/cypress/integration/examples/Home.js	(revision 9a92a0c1e40e5fac5fd83333c15f7e98c9bd381d)
++++ b/cypress/integration/examples/Home.js	(date 1606814152641)
+@@ -5,8 +5,9 @@
+         let a
+         cy.get('.table > tbody > :nth-child(3) > td').invoke('text').then(value => {
+             a = value
+-            cy.url().should('include','/block/'+a)
++            cy.url().should('include','/block/'+value)
+             cy.url().should('include','/blocks/')
++            cy
+         })
+     })
+ })
+\ No newline at end of file
