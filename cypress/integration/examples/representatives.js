@@ -4,18 +4,23 @@ describe('representatives', () => {
         // cy.intercept('GET', '/pagewitness', (req) => {
         //     expect(req.body).to.include('Acme Company')
         // })
-        cy.request('https://apilist.tronscan.org/api/pagewitness?witnesstype=1').its('body').as('witness1').then(function () {
-            expect(this.witness1.total).equal(27)
-            expect(this.witness1.total).equal(this.witness1.data.length)
-            for (witness of this.witness1.data) {
-                expect(witness.realTimeVotes).to.be.greaterThan(100000000)
-                expect(witness.changeVotes).to.be.greaterThan(0)
-                expect(witness.address).to.match(/^T[a-zA-Z1-9]{33}/)
-                expect(witness.name).to.not.equal('')
+        let number
+        cy.request('https://apilist.tronscan.io/api/block/latest').its('body').as('lastnumber').then(function () {
+            cy.log(this.lastnumber.number)
+            cy.request('https://apilist.tronscan.org/api/pagewitness?witnesstype=1').its('body').as('witness1').then(function () {
+                expect(this.witness1.total).equal(27)
+                expect(this.witness1.total).equal(this.witness1.data.length)
+                for (witness of this.witness1.data) {
+                    expect(witness.realTimeVotes).to.be.greaterThan(100000000)
+                    expect(this.lastnumber.number - witness.latestBlockNumber ).to.be.lessThan(200)
+                    expect(witness.changeVotes).to.be.greaterThan(0)
+                    expect(witness.address).to.match(/^T[a-zA-Z1-9]{33}/)
+                    expect(witness.name).to.not.equal('')
+                }
 
-            }
-
+            })
         })
+
     })
     it('超级代表合伙人', () => {
         cy.visit('https://tronscan.org/#/sr/representatives')
