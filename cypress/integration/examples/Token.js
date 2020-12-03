@@ -3,19 +3,20 @@ describe('tokens/list',function() {
         cy.visit('https://tronscan.io/#/tokens/list')
         cy.get('div > table > tbody > tr:nth-child(2) > td:nth-child(4) > div').invoke('text').then( price => {
             expect(price.slice(0,1)).is.not.empty
+            expect(price.slice(0,1)).is.not.equals('NaN')
             cy.request('https://apilist.tronscan.io/api/tokens/overview?start=0&limit=20&order=desc&filter=all&sort=marketcap&order_current=descend').its('body').as('btt1').then(function () {
                 cy.log(this.btt1.tokens[1].gain)
                 // expect(this.token1.total).equal(this.token1.data.length)
-                expect(Number(this.btt1.tokens[1].gain.toFixed(4)) * 100).to.equals(price.slice(0, 5) * 1)
-
+                if (price.slice(0,1) != 0){
+                expect(Number(this.btt1.tokens[1].gain.toFixed(4)) * 100).to.equals(price.slice(0, 5)*1)
+                }
             })
             cy.get('div > table > tbody > tr:nth-child(6) > td:nth-child(4) > div').invoke('text').then(pri => {
                 expect(pri).is.not.empty
                 expect(pri).to.equal(price)
             })
         })
-        cy.get('div > div > label:nth-child(2) > span:nth-child(2)').click()
-        cy.wait(600)
+
     })
 
     it('通证概览,Trx与WTrx价格对比', function () {
