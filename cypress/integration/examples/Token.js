@@ -22,6 +22,7 @@ describe('tokens/list',function() {
     it('通证概览,Trx与WTrx价格对比', function () {
         cy.visit('https://tronscan.io/#/tokens/list')
         cy.get('div > table > tbody > tr:nth-child(1) > td:nth-child(4) > div').invoke('text').then( price =>{
+            cy.wait(300)
             expect(price).is.not.empty
             cy.request('https://apilist.tronscan.io/api/token/price?token=trx').its('body').as('token1').then(function () {
                 cy.log(this.token1)
