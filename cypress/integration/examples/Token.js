@@ -1,33 +1,34 @@
 describe('tokens/list',function() {
     it('通证概览,BTT与WBTT价格对比', function () {
         cy.visit('https://tronscan.io/#/tokens/list')
-        cy.get('[data-row-key="1"] > :nth-child(4) > .col-red').invoke('text').then( price => {
-            expect(price).is.not.empty
+        cy.get('div > table > tbody > tr:nth-child(2) > td:nth-child(4) > div').invoke('text').then( price => {
+            expect(price.slice(0,1)).is.not.empty
             cy.request('https://apilist.tronscan.io/api/tokens/overview?start=0&limit=20&order=desc&filter=all&sort=marketcap&order_current=descend').its('body').as('btt1').then(function () {
                 cy.log(this.btt1.tokens[1].gain)
                 // expect(this.token1.total).equal(this.token1.data.length)
-                expect(Number(this.btt1.tokens[1].gain.toFixed(4))*100).to.equals(price.slice(0,5)*1)
+                expect(Number(this.btt1.tokens[1].gain.toFixed(4)) * 100).to.equals(price.slice(0, 5) * 1)
 
             })
-            cy.get('[data-row-key="5"] > :nth-child(4) > .col-red').invoke('text').then(pri => {
+            cy.get('div > table > tbody > tr:nth-child(6) > td:nth-child(4) > div').invoke('text').then(pri => {
                 expect(pri).is.not.empty
                 expect(pri).to.equal(price)
             })
         })
-
+        cy.get('div > div > label:nth-child(2) > span:nth-child(2)').click()
+        cy.wait(600)
     })
 
     it('通证概览,Trx与WTrx价格对比', function () {
         cy.visit('https://tronscan.io/#/tokens/list')
-        cy.get('[data-row-key="0"] > :nth-child(4) > .col-red').invoke('text').then( price =>{
+        cy.get('div > table > tbody > tr:nth-child(1) > td:nth-child(4) > div').invoke('text').then( price =>{
             expect(price).is.not.empty
             cy.request('https://apilist.tronscan.io/api/token/price?token=trx').its('body').as('token1').then(function () {
                 cy.log(this.token1)
                 // expect(this.token1.total).equal(this.token1.data.length)
-                expect(Number(this.token1.percent_change_24h.slice(0,6)).toFixed(2)).to.equal(price.slice(0,5))
+                expect(Number(this.token1.percent_change_24h.slice(0,6)).toFixed(2)).to.equal(price.slice(1,5))
 
             })
-            cy.get('.redPrice > span').invoke('text').then(pri => {
+            cy.get('.currentCurrencyMobile > span').invoke('text').then(pri => {
                 expect(pri).is.not.empty
                 expect(pri.slice(1,7)).to.equal(price)
             })
