@@ -1,6 +1,8 @@
 describe('representatives', () => {
     it('超级代表', () => {
         cy.visit('https://tronscan.org/#/sr/representatives')
+        cy.get(':nth-child(27) > :nth-child(5)').scrollIntoView().should('be.visible')
+
         // cy.intercept('GET', '/pagewitness', (req) => {
         //     expect(req.body).to.include('Acme Company')
         // })
