@@ -1,5 +1,5 @@
 describe('blockchain/transactions',function (){
-    it('交易', function () {
+    it('交易页面', function () {
         cy.visit('https://tronscan.org/#/blockchain/transactions')
         cy.wait(1000)
         cy.request('https://apilist.tronscan.org/api/transaction/statistics').its('body').as('trans').then(function (){
@@ -16,7 +16,7 @@ describe('blockchain/transactions',function (){
                 expect(this.star0.data.length).equals(20)
 
         })
-        cy.request('https://apilist.tronscan.io/api/transaction?sort=-timestamp&count=true&limit=20&start=9980&start_timestamp=1529856000000&end_timestamp=1607063784617')
+        cy.request('https://apilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=20&start=9980&start_timestamp=1529856000000&end_timestamp=1607063784617')
             .its('body').as('star500').then(function (){
                 cy.log(this.star500.data.length)
                 expect(this.star500.data.length).equals(20)
