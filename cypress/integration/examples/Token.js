@@ -1,10 +1,12 @@
 describe('tokens/list',function() {
     it('通证概览,BTT与WBTT价格对比', function () {
-        cy.visit('https://tronscan.io/#/tokens/list')
+        cy.visit('https://tronscan.org/#/tokens/list')
+        cy.wait(1000)
         cy.get('div > table > tbody > tr:nth-child(2) > td:nth-child(4) > div').invoke('text').then( price => {
+            cy.wait(600)
             expect(price.slice(0,1)).is.not.empty
             expect(price.slice(0,1)).is.not.equals('NaN')
-            cy.request('https://apilist.tronscan.io/api/tokens/overview?start=0&limit=20&order=desc&filter=all&sort=marketcap&order_current=descend').its('body').as('btt1').then(function () {
+            cy.request('https://apilist.tronscan.org/api/tokens/overview?start=0&limit=20&order=desc&filter=all&sort=marketcap&order_current=descend').its('body').as('btt1').then(function () {
                 cy.log(this.btt1.tokens[1].gain)
                 // expect(this.token1.total).equal(this.token1.data.length)
                 if (price.slice(0,1) != 0){
@@ -20,11 +22,12 @@ describe('tokens/list',function() {
     })
 
     it('通证概览,Trx与WTrx价格对比', function () {
-        cy.visit('https://tronscan.io/#/tokens/list')
+        cy.visit('https://tronscan.org/#/tokens/list')
+        cy.wait(1000)
         cy.get('div > table > tbody > tr:nth-child(1) > td:nth-child(4) > div').invoke('text').then( price =>{
-            cy.wait(300)
+            cy.wait(600)
             expect(price).is.not.empty
-            cy.request('https://apilist.tronscan.io/api/token/price?token=trx').its('body').as('token1').then(function () {
+            cy.request('https://apilist.tronscan.org/api/token/price?token=trx').its('body').as('token1').then(function () {
                 cy.log(this.token1)
                 // expect(this.token1.total).equal(this.token1.data.length)
                 expect(Number(this.token1.percent_change_24h.slice(0,6)).toFixed(2)).to.equal(price.slice(1,5))
