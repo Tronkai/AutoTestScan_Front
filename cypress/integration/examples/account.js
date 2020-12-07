@@ -15,43 +15,43 @@ describe('tokens/list',function() {
         "TVgAYofpQku5G4zenXnvxhbZxpzzrk8WVK",
 
     ]
-    // it('账户-通证余额token加Vip通证',function (){
-    //     cy.visit('https://debug.tronscan.org/#/address/TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
-    //     cy.request('https://debugapilist.tronscan.org/api/account?address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
-    //         .its('body').as('trctoken').then(function (){
-    //         cy.log(this.trctoken.trc20token_balances[0].tokenType)
-    //         for(let i in arr){
-    //             for(let j in this.trctoken.trc20token_balances){
-    //                 if(arr[i] == this.trctoken.trc20token_balances[j].tokenId){
-    //                     assert.equal(this.trctoken.trc20token_balances[j].vip,true,"token简称:"+this.trctoken.trc20token_balances[j].tokenAbbr
-    //                         +" id:"+this.trctoken.trc20token_balances[j].tokenId)
-    //                 }
-    //             }
-    //             // cy.log(this.trc20token.tokens[0].tokenType)
-    //             for(let j in this.trctoken.tokens){
-    //                 if(arr[i] == this.trctoken.tokens[j].tokenId){
-    //                     assert.equal(this.trctoken.tokens[j].vip,true,"token简称:"+this.trctoken.tokens[j].tokenAbbr
-    //                         +" id:"+this.trctoken.tokens[j].tokenId)
-    //                 }
-    //             }
-    //             // cy.log(this.trc20token.tokenBalances[0].tokenType)
-    //             for(let j in this.trctoken.tokenBalances){
-    //                 if(arr[i] == this.trctoken.tokenBalances[j].tokenId){
-    //                     assert.equal(this.trctoken.tokenBalances[j].vip,true,"token简称:"+this.trctoken.tokenBalances[j].tokenAbbr
-    //                         +" id:"+this.trctoken.tokenBalances[j].tokenId)
-    //                 }
-    //             }
-    //             // cy.log(this.trc20token.balances[0].tokenType)
-    //             for(let j in this.trctoken.balances){
-    //                 if(arr[i] == this.trctoken.balances[j].tokenId){
-    //                     assert.equal(this.trctoken.balances[j].vip,true,"token简称:"+this.trctoken.balances[j].tokenAbbr
-    //                         +" id:"+this.trctoken.balances[j].tokenId)
-    //                 }
-    //             }
-    //         }
-    //
-    //     })
-    // })
+    it('账户-通证余额token加Vip通证',function (){
+        cy.visit('https://debug.tronscan.org/#/address/TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
+        cy.request('https://debugapilist.tronscan.org/api/account?address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
+            .its('body').as('trctoken').then(function (){
+            cy.log(this.trctoken.trc20token_balances[0].tokenType)
+            for(let i in arr){
+                for(let j in this.trctoken.trc20token_balances){
+                    if(arr[i] == this.trctoken.trc20token_balances[j].tokenId){
+                        assert.equal(this.trctoken.trc20token_balances[j].vip,true,"token简称:"+this.trctoken.trc20token_balances[j].tokenAbbr
+                            +" id:"+this.trctoken.trc20token_balances[j].tokenId)
+                    }
+                }
+                // cy.log(this.trc20token.tokens[0].tokenType)
+                for(let j in this.trctoken.tokens){
+                    if(arr[i] == this.trctoken.tokens[j].tokenId){
+                        assert.equal(this.trctoken.tokens[j].vip,true,"token简称:"+this.trctoken.tokens[j].tokenAbbr
+                            +" id:"+this.trctoken.tokens[j].tokenId)
+                    }
+                }
+                // cy.log(this.trc20token.tokenBalances[0].tokenType)
+                for(let j in this.trctoken.tokenBalances){
+                    if(arr[i] == this.trctoken.tokenBalances[j].tokenId){
+                        assert.equal(this.trctoken.tokenBalances[j].vip,true,"token简称:"+this.trctoken.tokenBalances[j].tokenAbbr
+                            +" id:"+this.trctoken.tokenBalances[j].tokenId)
+                    }
+                }
+                // cy.log(this.trc20token.balances[0].tokenType)
+                for(let j in this.trctoken.balances){
+                    if(arr[i] == this.trctoken.balances[j].tokenId){
+                        assert.equal(this.trctoken.balances[j].vip,true,"token简称:"+this.trctoken.balances[j].tokenAbbr
+                            +" id:"+this.trctoken.balances[j].tokenId)
+                    }
+                }
+            }
+
+        })
+    })
 
      it('账户-交易页面',function (){
         cy.visit('https://debug.tronscan.org/#/blockchain/accounts')
