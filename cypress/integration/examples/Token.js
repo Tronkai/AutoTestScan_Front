@@ -1,4 +1,20 @@
 describe('tokens/list',function() {
+    let arr=[
+        "TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR",
+        "TKfjV9RNKJJCqPvBtK8L7Knykh7DNWvnYt",
+        "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9",
+        "THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF",
+        "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+        "1002000",
+        "TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7",
+        "TMwFHYXLJaRUPeW6421aqXL4ZEzPRFGkGT",
+        "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9",
+        "TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9",
+        "TDyvndWuvX5xTBwHPYJi7J3Yq8pq8yh62h",
+        "TKttnV3FSY1iEoAwB4N52WK2DxdV94KpSd",
+        "TVgAYofpQku5G4zenXnvxhbZxpzzrk8WVK",
+
+    ]
     it('通证概览,BTT与WBTT价格对比', function () {
         cy.visit('https://tronscan.org/#/tokens/list')
         cy.wait(1000)
@@ -78,27 +94,11 @@ describe('tokens/list',function() {
         })
     })
 
-    it('加Vip通证',function (){
+    it('通证概览-加Vip通证',function (){
         cy.visit('https://debug.tronscan.org/#/tokens/list')
         cy.request('https://debugapilist.tronscan.org/api/tokens/overview?start=0&limit=20&order=desc&filter=all&sort=marketcap&order_current=descend')
             .its('body').as('tokenVip').then(function (){
-                cy.log(this.tokenVip.tokens[0].tokenType)
-            let arr=[
-                "TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR",
-                "TKfjV9RNKJJCqPvBtK8L7Knykh7DNWvnYt",
-                "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9",
-                "THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF",
-                "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
-                "1002000",
-                "TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7",
-                "TMwFHYXLJaRUPeW6421aqXL4ZEzPRFGkGT",
-                "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9",
-                "TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9",
-                "TDyvndWuvX5xTBwHPYJi7J3Yq8pq8yh62h",
-                "TKttnV3FSY1iEoAwB4N52WK2DxdV94KpSd",
-                "TVgAYofpQku5G4zenXnvxhbZxpzzrk8WVK",
-
-            ]
+            cy.log(this.tokenVip.tokens[0].tokenType)
             for(let i in arr){
                 for(let j in this.tokenVip.tokens){
                     if(arr[i] == this.tokenVip.tokens[j].contractAddress || arr[i] == this.tokenVip.tokens[j].tokenId){
@@ -111,4 +111,20 @@ describe('tokens/list',function() {
         })
     })
 
+    it('首页-热门通证加Vip',function (){
+        cy.visit('https://debug.tronscan.org/#/searchmore')
+        cy.request('https://debugapilist.tronscan.org/api/search/hot')
+            .its('body').as('hotVip').then(function (){
+            cy.log(this.hotVip.hot_tokens[0].tokenType)
+            for(let i in arr){
+                for(let j in this.hotVip.hot_tokens){
+                    if(arr[i] == this.hotVip.hot_tokens[j].id){
+                        assert.equal(this.hotVip.hot_tokens[j].vip_token,true,"token简称:"+this.hotVip.hot_tokens[j].abbr
+                            +" id:"+this.hotVip.hot_tokens[j].id)
+                    }
+                }
+            }
+
+        })
+    })
 })
