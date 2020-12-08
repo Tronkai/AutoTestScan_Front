@@ -75,8 +75,8 @@ describe('tokens/list',function() {
                              assert.equal(this.tokendata.data[j].tokenInfo.vip, true, "token简称:" + this.tokendata.data[j].tokenInfo.tokenAbbr
                                  + " id:" + this.tokendata.data[j].tokenInfo.tokenId)
                          }
-                         assert.isNotNaN(this.tokendata.data[j].amount, this.tokendata.data[j].amount+' is not NaN')
-                         assert.exists(this.tokendata.data[j].amount, this.tokendata.data[j].amount +'is not null or undefined')
+                         assert.isNotNaN(this.tokendata.data[j].amount, this.tokendata.data[j].tokenInfo.tokenAbbr+' is not NaN')
+                         assert.exists(this.tokendata.data[j].amount, this.tokendata.data[j].tokenInfo.tokenAbbr +' is not null or undefined')
                      }
                  }
              })
@@ -94,8 +94,8 @@ describe('tokens/list',function() {
                              assert.equal(this.tokendatalast.data[j].tokenInfo.vip, true, "token简称:" + this.tokendatalast.data[j].tokenInfo.tokenAbbr
                                  + " id:" + this.tokendatalast.data[j].tokenInfo.tokenId)
                          }
-                         assert.isNotNaN(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].amount+' is not NaN')
-                         assert.exists(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].amount +'is not null or undefined')
+                         assert.isNotNaN(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].tokenInfo.tokenAbbr+' is not NaN')
+                         assert.exists(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].tokenInfo.tokenAbbr +' is not null or undefined')
                      }
                  }
              })
@@ -118,11 +118,53 @@ describe('tokens/list',function() {
                             assert.equal(this.tokendata.data[j].tokenInfo.vip, true, "token简称:" + this.tokendata.data[j].tokenInfo.tokenAbbr
                                 + " id:" + this.tokendata.data[j].tokenInfo.tokenId)
                         }
-                         assert.isNotNaN(this.tokendata.data[j].amount, this.tokendata.data[j].amount+' is not NaN')
-                         assert.exists(this.tokendata.data[j].amount, this.tokendata.data[j].amount +'is not null or undefined')
+                         assert.isNotNaN(this.tokendata.data[j].amount, this.tokendata.data[j].tokenInfo.tokenAbbr+' is not NaN')
+                         assert.exists(this.tokendata.data[j].amount, this.tokendata.data[j].tokenInfo.tokenAbbr +' is not null or undefined')
                     }
                 }
             })
         })
+        //TRC20转账
+        cy.get(' div > div:nth-child(1) > div > div > label:nth-child(2) > span:nth-child(2) > span').click()
+        cy.get(' div > div.row.mb-3.mt-3 > div > div > div > span > span:nth-child(2)').invoke('text').then(totalCount => {
+            cy.request('https://debugapilist.tronscan.org/api/token_trc20/transfers?limit=20&start=0&sort=-timestamp&count=true&relatedAddress=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
+                .its('body').as('TRC20').then(function () {
+                assert.equal(parseFloat(this.TRC20.total), parseFloat(totalCount.replace(/\D/g, '')), "total equal")
+                for (let i in arr) {
+                    for (let j in this.TRC20.token_transfers) {
+                        if (arr[i] == this.TRC20.token_transfers[j].tokenInfo.tokenId) {
+                            assert.equal(this.TRC20.token_transfers[j].tokenInfo.vip, true, "token简称:" + this.TRC20.token_transfers[j].tokenInfo.tokenAbbr
+                                + " id:" + this.TRC20.token_transfers[j].tokenInfo.tokenId)
+                        }
+                        assert.isNotNaN(this.TRC20.token_transfers[j].quant, this.TRC20.token_transfers[j].tokenInfo.tokenAbbr + ' is not NaN')
+                        assert.exists(this.TRC20.token_transfers[j].quant, this.TRC20.token_transfers[j].tokenInfo.tokenAbbr + ' is not null or undefined')
+                    }
+                }
+            })
+        })
+
     })
+
+    it('账户-内部交易页面',function (){
+        cy.visit('https://debug.tronscan.org/#/blockchain/accounts')
+        cy.get('div > table > tbody > tr:nth-child(2) > td:nth-child(2) > div').click()
+        cy.wait(600)
+        cy.get('div.card-header.list-style-body__header > ul > li:nth-child(4) > a > span > span').click()
+        cy.wait(600)
+        cy.request('https://debugapilist.tronscan.org/api/internal-transaction?limit=20&start=0&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
+            .its('body').as('tokendata').then(function (){
+            assert.equal(parseFloat(this.tokendata.total),parseFloat(this.tokendata.data.length),"total equal")
+            for(let i in arr) {
+                for (let j in this.tokendata.data) {
+                    if (arr[i] == this.tokendata.data[j].token_list.tokenInfo.tokenId)  {
+                        assert.equal(this.tokendata.data[j].token_list.tokenInfo.vip, true, "token简称:" + this.tokendata.data[j].token_list.tokenInfo.tokenAbbr
+                            + " id:" + this.tokendata.data[j].token_list.tokenInfo.tokenId)
+                    }
+                    assert.isNotNaN(this.tokendata.data[j].call_value, this.tokendata.data[j].token_list.tokenInfo.tokenAbbr+' is not NaN')
+                    assert.exists(this.tokendata.data[j].call_value, this.tokendata.data[j].token_list.tokenInfo.tokenAbbr +' is not null or undefined')
+                }
+            }
+        })
+        })
+
 })
