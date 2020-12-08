@@ -52,22 +52,18 @@ describe('tokens/list',function() {
      it('账户-交易页面',function (){
         cy.visit('https://debug.tronscan.org/#/blockchain/accounts')
         cy.wait(600)
-        cy.get('div > table > tbody > tr:nth-child(3) > td:nth-child(2) > div').click()
+        cy.get('div > table > tbody > tr:nth-child(2) > td:nth-child(2) > div').click()
          cy.wait(600)
          cy.get('table > tbody > tr:nth-child(4) > td > ul > li > div > div > span:nth-child(3)').invoke('text').then(price =>{
              assert.exists(price, price +'is not null or undefined')
          })
-         cy.get('table > tbody > tr:nth-child(6) > td > a > span > span').invoke('text').then(totalCount =>{
+         cy.get('div.col-md-7.address-info > table > tbody > tr:nth-child(6) > td > a > span > span').invoke('text').then(totalCount =>{
              assert.exists(totalCount, totalCount +'is not null or undefined')
-             cy.request('https://debugapilist.tronscan.org/api/account?address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
-                 .its('body').as('balanceAmount').then(function (){
-                 cy.log(parseFloat(this.balanceAmount.totalTransactionCount))
-                 assert.equal(parseFloat(this.balanceAmount.totalTransactionCount),parseFloat(totalCount.replace(/\D/g, '')),"vals equal")
-             })
-             cy.request('https://debugapilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=20&start=0&address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
+             cy.request('https://debugapilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=20&start=0&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
                  .its('body').as('tokendata').then(function (){
-                 cy.log(parseFloat(this.tokendata.total))
-                 assert.equal(parseFloat(this.tokendata.total),parseFloat(totalCount.replace(/\D/g, '')),"vals equal")
+                 cy.log(parseFloat(this.tokendata.rangeTotal))
+                 // assert.equal(parseFloat(this.tokendata.rangeTotal),parseFloat(totalCount.replace(/\D/g, '')),"vals equal")
+                 cy.wait(300)
                  for(let i in arr) {
                      for (let j in this.tokendata.data) {
                          if (arr[i] == this.tokendata.data[j].tokenInfo.tokenId) {
@@ -80,49 +76,38 @@ describe('tokens/list',function() {
                  }
 
              })
-             //最后一页数据
-             cy.get('div.card-header.list-style-body__header > ul > li:nth-child(2) > a > span > span').click()
-             cy.get('.ant-pagination-item-24 > a').click()
-             cy.wait(600)
-             cy.request('https://debugapilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=20&start=460&address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
-                 .its('body').as('tokendatalast').then(function (){
-                 cy.log(parseFloat(this.tokendatalast.total))
-                 assert.equal(parseFloat(this.tokendatalast.total),parseFloat(totalCount.replace(/\D/g, '')),"vals equal")
-                 for(let i in arr) {
-                     for (let j in this.tokendatalast.data) {
-                         if (arr[i] == this.tokendatalast.data[j].tokenInfo.tokenId)  {
-                             assert.equal(this.tokendatalast.data[j].tokenInfo.vip, true, "token简称:" + this.tokendatalast.data[j].tokenInfo.tokenAbbr
-                                 + " id:" + this.tokendatalast.data[j].tokenInfo.tokenId)
-                         }
-                         assert.isNotNaN(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].tokenInfo.tokenAbbr+' is not NaN')
-                         assert.exists(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].tokenInfo.tokenAbbr +' is not null or undefined')
-                     }
-                 }
-             })
-             //交易详情页
-             cy.get(' table > tbody > tr:nth-child(1) > td:nth-child(1) > div > span > a > div').click()
-             cy.request('https://debugapilist.tronscan.org/api/transaction-info?hash=5de223643c594e808e844a90324225b693bd8dfa1679faf3949839bbe7ca2327')
-                 .its('body').as('tokendetails').then(function () {
-                 for(let i in arr) {
-                     if (arr[i] == this.tokendetails.contractData.tokenInfo.tokenId) {
-                         assert.equal(this.tokendetails.contractData.tokenInfo.vip, true, "token简称:" + this.tokendetails.contractData.tokenInfo.tokenAbbr
-                             + " id:" + this.tokendetails.contractData.tokenInfo.tokenId)
-                     }
-                     assert.isNotNaN(this.tokendetails.contractData.amount, this.tokendetails.contractData.tokenInfo.tokenAbbr + ' is not NaN')
-                     assert.exists(this.tokendetails.contractData.amount, this.tokendetails.contractData.tokenInfo.tokenAbbr + ' is not null or undefined')
-                 }
-             })
+             // //最后一页数据
+             // cy.get('div.card-header.list-style-body__header > ul > li:nth-child(2) > a > span > span').click()
+             // cy.wait(600)
+             // cy.get('div:nth-child(2) > div > div > div > div > ul > li.ant-pagination-item.ant-pagination-item-500.ant-pagination-item-active').click()
+             // cy.wait(600)
+             // cy.request('https://debugapilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=20&start=9980&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
+             //     .its('body').as('tokendatalast').then(function (){
+             //     cy.log(parseFloat(this.tokendatalast.rangeTotal))
+             //     // assert.equal(parseFloat(this.tokendatalast.rangeTotal),parseFloat(totalCount.replace(/\D/g, '')),"vals equal")
+             //     for(let i in arr) {
+             //         for (let j in this.tokendatalast.data) {
+             //             if (arr[i] == this.tokendatalast.data[j].tokenInfo.tokenId)  {
+             //                 assert.equal(this.tokendatalast.data[j].tokenInfo.vip, true, "token简称:" + this.tokendatalast.data[j].tokenInfo.tokenAbbr
+             //                     + " id:" + this.tokendatalast.data[j].tokenInfo.tokenId)
+             //             }
+             //             assert.isNotNaN(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].tokenInfo.tokenAbbr+' is not NaN')
+             //             assert.exists(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].tokenInfo.tokenAbbr +' is not null or undefined')
+             //         }
+             //     }
+             // })
          })
 
         })
     it('账户-转账页面',function (){
         cy.visit('https://debug.tronscan.org/#/blockchain/accounts')
-        cy.get('div > table > tbody > tr:nth-child(3) > td:nth-child(2) > div').click()
+        cy.get('div > table > tbody > tr:nth-child(2) > td:nth-child(2) > div').click()
         cy.wait(600)
         cy.get('div.card-header.list-style-body__header > ul > li:nth-child(3) > a > span > span').click()
         cy.wait(600)
-        cy.get(' div > div.row.mb-3.mt-3 > div > div > div > span > span:nth-child(2)').invoke('text').then(totalCount =>{
-            cy.request('https://debugapilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=0&address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
+        cy.get('div.card-body.p-0.list-style-body__body > div > div.row.mb-3.mt-3 > div > div > div > section > span:nth-child(2)')
+            .invoke('text').then(totalCount =>{
+            cy.request('https://debugapilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=0&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
                 .its('body').as('tokendata').then(function (){
                 assert.equal(parseFloat(this.tokendata.rangeTotal),parseFloat(totalCount.replace(/\D/g, '')),"total equal")
                 for(let i in arr) {
@@ -139,8 +124,8 @@ describe('tokens/list',function() {
         })
         //TRC20转账
         cy.get(' div > div:nth-child(1) > div > div > label:nth-child(2) > span:nth-child(2) > span').click()
-        cy.get(' div > div.row.mb-3.mt-3 > div > div > div > span > span:nth-child(2)').invoke('text').then(totalCount => {
-            cy.request('https://debugapilist.tronscan.org/api/token_trc20/transfers?limit=20&start=0&sort=-timestamp&count=true&relatedAddress=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
+        cy.get(' div > div.row.mb-3.mt-3 > div > div > div > section > span:nth-child(2)').invoke('text').then(totalCount => {
+            cy.request('https://debugapilist.tronscan.org/api/token_trc20/transfers?limit=20&start=0&sort=-timestamp&count=true&relatedAddress=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
                 .its('body').as('TRC20').then(function () {
                 assert.equal(parseFloat(this.TRC20.rangeTotal), parseFloat(totalCount.replace(/\D/g, '')), "total equal")
                 for (let i in arr) {
@@ -177,6 +162,21 @@ describe('tokens/list',function() {
                     assert.exists(this.tokendata.data[j].call_value, this.tokendata.data[j].token_list.tokenInfo.tokenAbbr +' is not null or undefined')
                 }
             }
+        })
+        //内部交易详情
+        cy.get(' table > tbody > tr:nth-child(1) > td:nth-child(1) > div > span > a > div').click()
+        cy.wait(600)
+        cy.request('https://debugapilist.tronscan.org/api/transaction-info?hash=130efc9d3b5bbde00db790b5c6fec299e7a054b3e1702cc8434e48e1521d8d25')
+            .its('body').as('tokendata').then(function (){
+            for(let i in arr) {
+                    if (arr[i] == this.tokendata.contractData.tokenInfo.tokenId)  {
+                        assert.equal(this.tokendata.contractData.tokenInfo.vip, true, "token简称:" + this.tokendata.contractData.tokenInfo.tokenAbbr
+                            + " id:" + this.tokendata.contractData.tokenInfo.tokenId)
+                    }
+                    assert.isNotNaN(this.tokendata.contractData.call_value, this.tokendata.contractData.tokenInfo.tokenAbbr+' is not NaN')
+                    assert.exists(this.tokendata.contractData.call_value, this.tokendata.contractData.tokenInfo.tokenAbbr +' is not null or undefined')
+                }
+
         })
         })
 

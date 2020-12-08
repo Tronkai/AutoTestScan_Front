@@ -26,6 +26,44 @@ describe('blockchain/blocks',function (){
                 }
             })
         })
+       cy.get(' div > table > tbody > tr:nth-child(1) > td.ant_table.table-first-padding > a').click()
+        cy.get('div.table-responsive > table > tbody > tr:nth-child(5) > td').invoke('text').then(tranfCount => {
+            cy.request('https://debugapilist.tronscan.org/api/block?sort=-number&limit=20&count=true&start=0&start_timestamp=&end_timestamp=')
+                .its('body').as('transferblacks').then(function () {
+                assert.equal(parseFloat(this.transferblacks.total),parseFloat(totalCount.slice(0,-4)),"total equal")
+                assert.exists(this.transferblacks.data.length, ' is not null or undefined')
+                for(let i in arr) {
+                    for (let j in this.transferblacks.data) {
+                        if (arr[i] == this.transferblacks.data[j].tokenInfo.tokenId)  {
+                            assert.equal(this.transferblacks.data[j].tokenInfo.vip, true, "token简称:" + this.transferblacks.data[j].tokenInfo.tokenAbbr
+                                + " id:" + this.transferblacks.data[j].tokenInfo.tokenId)
+                        }
+                        assert.isNotNaN(this.transferblacks.data[j].hash, this.transferblacks.data[j].tokenInfo.tokenAbbr+' is not NaN')
+                        assert.exists(this.transferblacks.data[j].hash, this.transferblacks.data[j].tokenInfo.tokenAbbr +' is not null or undefined')
+                    }
+                }
+                assert.isNotNaN(this.transferblacks.data[j].timestamp, ' is not NaN')
+                assert.exists(this.transferblacks.data[j].timestamp, ' is not null or undefined')
+            })
+        })
+        //区块转账
+        cy.get('div.card-header.list-style-body__header > ul > li:nth-child(2) > a > span > span').click()
+            cy.request('https://debugapilist.tronscan.org/api/block?sort=-number&limit=20&count=true&start=0&start_timestamp=&end_timestamp=')
+                .its('body').as('transactionblacks').then(function () {
+                assert.exists(this.transactionblacks.data.length, ' is not null or undefined')
+                for(let i in arr) {
+                    for (let j in this.transactionblacks.data) {
+                        if (arr[i] == this.transactionblacks.data[j].tokenInfo.tokenId)  {
+                            assert.equal(this.transactionblacks.data[j].tokenInfo.vip, true, "token简称:" + this.transactionblacks.data[j].tokenInfo.tokenAbbr
+                                + " id:" + this.transactionblacks.data[j].tokenInfo.tokenId)
+                        }
+                        assert.isNotNaN(this.transactionblacks.data[j].amount, this.transactionblacks.data[j].tokenInfo.tokenAbbr+' is not NaN')
+                        assert.exists(this.transactionblacks.data[j].amount, this.transactionblacks.data[j].tokenInfo.tokenAbbr +' is not null or undefined')
+                    }
+                }
+                assert.isNotNaN(this.transactionblacks.data[j].timestamp, ' is not NaN')
+                assert.exists(this.transactionblacks.data[j].timestamp, ' is not null or undefined')
+            })
 
     })
 })
