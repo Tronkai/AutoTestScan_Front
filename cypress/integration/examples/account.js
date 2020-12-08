@@ -19,7 +19,6 @@ describe('tokens/list',function() {
         cy.visit('https://debug.tronscan.org/#/address/TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
         cy.request('https://debugapilist.tronscan.org/api/account?address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
             .its('body').as('trctoken').then(function (){
-            cy.log(this.trctoken.trc20token_balances[0].tokenType)
             for(let i in arr){
                 for(let j in this.trctoken.trc20token_balances){
                     if(arr[i] == this.trctoken.trc20token_balances[j].tokenId){
@@ -27,21 +26,18 @@ describe('tokens/list',function() {
                             +" id:"+this.trctoken.trc20token_balances[j].tokenId)
                     }
                 }
-                // cy.log(this.trc20token.tokens[0].tokenType)
                 for(let j in this.trctoken.tokens){
                     if(arr[i] == this.trctoken.tokens[j].tokenId){
                         assert.equal(this.trctoken.tokens[j].vip,true,"token简称:"+this.trctoken.tokens[j].tokenAbbr
                             +" id:"+this.trctoken.tokens[j].tokenId)
                     }
                 }
-                // cy.log(this.trc20token.tokenBalances[0].tokenType)
                 for(let j in this.trctoken.tokenBalances){
                     if(arr[i] == this.trctoken.tokenBalances[j].tokenId){
                         assert.equal(this.trctoken.tokenBalances[j].vip,true,"token简称:"+this.trctoken.tokenBalances[j].tokenAbbr
                             +" id:"+this.trctoken.tokenBalances[j].tokenId)
                     }
                 }
-                // cy.log(this.trc20token.balances[0].tokenType)
                 for(let j in this.trctoken.balances){
                     if(arr[i] == this.trctoken.balances[j].tokenId){
                         assert.equal(this.trctoken.balances[j].vip,true,"token简称:"+this.trctoken.balances[j].tokenAbbr
@@ -59,12 +55,11 @@ describe('tokens/list',function() {
         cy.get('div > table > tbody > tr:nth-child(3) > td:nth-child(2) > div').click()
          cy.wait(600)
          cy.get('table > tbody > tr:nth-child(4) > td > ul > li > div > div > span:nth-child(3)').invoke('text').then(price =>{
-             // cy.log(price)
-             expect(price).is.not.empty
+             assert.exists(price, price +'is not null or undefined')
          })
          cy.get('table > tbody > tr:nth-child(6) > td > a > span > span').invoke('text').then(totalCount =>{
              cy.log(parseFloat(totalCount.replace(/\D/g, '')))
-             expect(totalCount).is.not.empty
+             assert.exists(totalCount, totalCount +'is not null or undefined')
              cy.request('https://debugapilist.tronscan.org/api/account?address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
                  .its('body').as('balanceAmount').then(function (){
                  cy.log(parseFloat(this.balanceAmount.totalTransactionCount))
@@ -74,14 +69,14 @@ describe('tokens/list',function() {
                  .its('body').as('tokendata').then(function (){
                  cy.log(parseFloat(this.tokendata.total))
                  assert.equal(parseFloat(this.tokendata.total),parseFloat(totalCount.replace(/\D/g, '')),"vals equal")
-                 cy.log(this.tokendata.data[0].tokenInfo.tokenType)
                  for(let i in arr) {
                      for (let j in this.tokendata.data) {
-                         // cy.log(this.token.data[0].tokenId)
                          if (arr[i] == this.tokendata.data[j].tokenInfo.tokenId) {
                              assert.equal(this.tokendata.data[j].tokenInfo.vip, true, "token简称:" + this.tokendata.data[j].tokenInfo.tokenAbbr
                                  + " id:" + this.tokendata.data[j].tokenInfo.tokenId)
                          }
+                         assert.isNotNaN(this.tokendata.data[j].amount, this.tokendata.data[j].amount+' is not NaN')
+                         assert.exists(this.tokendata.data[j].amount, this.tokendata.data[j].amount +'is not null or undefined')
                      }
                  }
              })
@@ -93,20 +88,41 @@ describe('tokens/list',function() {
                  .its('body').as('tokendatalast').then(function (){
                  cy.log(parseFloat(this.tokendatalast.total))
                  assert.equal(parseFloat(this.tokendatalast.total),parseFloat(totalCount.replace(/\D/g, '')),"vals equal")
-                 cy.log(this.tokendatalast.data[0].tokenInfo.tokenId)
                  for(let i in arr) {
                      for (let j in this.tokendatalast.data) {
-                         cy.log(this.tokendatalast.data[0].tokenInfo+"88888")
-                         // if (arr[i] == this.tokendatalast.data[j].tokenInfo.tokenId) {
-                         //     cy.log(this.tokendatalast.data[0].tokenInfo+"9999999")
-                         //     assert.equal(this.tokendatalast.data[j].tokenInfo.vip, true, "token简称:" + this.tokendatalast.data[j].tokenInfo.tokenAbbr
-                         //         + " id:" + this.tokendatalast.data[j].tokenInfo.tokenId)
-                         // }
+                         if (arr[i] == this.tokendatalast.data[j].tokenInfo.tokenId)  {
+                             assert.equal(this.tokendatalast.data[j].tokenInfo.vip, true, "token简称:" + this.tokendatalast.data[j].tokenInfo.tokenAbbr
+                                 + " id:" + this.tokendatalast.data[j].tokenInfo.tokenId)
+                         }
+                         assert.isNotNaN(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].amount+' is not NaN')
+                         assert.exists(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].amount +'is not null or undefined')
                      }
                  }
              })
          })
 
         })
-
+    it('账户-转账页面',function (){
+        cy.visit('https://debug.tronscan.org/#/blockchain/accounts')
+        cy.get('div > table > tbody > tr:nth-child(3) > td:nth-child(2) > div').click()
+        cy.wait(600)
+        cy.get('div.card-header.list-style-body__header > ul > li:nth-child(3) > a > span > span').click()
+        cy.wait(600)
+        cy.get(' div > div.row.mb-3.mt-3 > div > div > div > span > span:nth-child(2)').invoke('text').then(totalCount =>{
+            cy.request('https://debugapilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=0&address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
+                .its('body').as('tokendata').then(function (){
+                assert.equal(parseFloat(this.tokendata.total),parseFloat(totalCount.replace(/\D/g, '')),"total equal")
+                for(let i in arr) {
+                    for (let j in this.tokendata.data) {
+                        if (arr[i] == this.tokendata.data[j].tokenInfo.tokenId)  {
+                            assert.equal(this.tokendata.data[j].tokenInfo.vip, true, "token简称:" + this.tokendata.data[j].tokenInfo.tokenAbbr
+                                + " id:" + this.tokendata.data[j].tokenInfo.tokenId)
+                        }
+                         assert.isNotNaN(this.tokendata.data[j].amount, this.tokendata.data[j].amount+' is not NaN')
+                         assert.exists(this.tokendata.data[j].amount, this.tokendata.data[j].amount +'is not null or undefined')
+                    }
+                }
+            })
+        })
+    })
 })
