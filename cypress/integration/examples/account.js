@@ -58,7 +58,6 @@ describe('tokens/list',function() {
              assert.exists(price, price +'is not null or undefined')
          })
          cy.get('table > tbody > tr:nth-child(6) > td > a > span > span').invoke('text').then(totalCount =>{
-             cy.log(parseFloat(totalCount.replace(/\D/g, '')))
              assert.exists(totalCount, totalCount +'is not null or undefined')
              cy.request('https://debugapilist.tronscan.org/api/account?address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
                  .its('body').as('balanceAmount').then(function (){
@@ -79,6 +78,7 @@ describe('tokens/list',function() {
                          assert.exists(this.tokendata.data[j].amount, this.tokendata.data[j].tokenInfo.tokenAbbr +' is not null or undefined')
                      }
                  }
+
              })
              //最后一页数据
              cy.get('div.card-header.list-style-body__header > ul > li:nth-child(2) > a > span > span').click()
@@ -99,6 +99,19 @@ describe('tokens/list',function() {
                      }
                  }
              })
+             //交易详情页
+             cy.get(' table > tbody > tr:nth-child(1) > td:nth-child(1) > div > span > a > div').click()
+             cy.request('https://debugapilist.tronscan.org/api/transaction-info?hash=5de223643c594e808e844a90324225b693bd8dfa1679faf3949839bbe7ca2327')
+                 .its('body').as('tokendetails').then(function () {
+                 for(let i in arr) {
+                     if (arr[i] == this.tokendetails.contractData.tokenInfo.tokenId) {
+                         assert.equal(this.tokendetails.contractData.tokenInfo.vip, true, "token简称:" + this.tokendetails.contractData.tokenInfo.tokenAbbr
+                             + " id:" + this.tokendetails.contractData.tokenInfo.tokenId)
+                     }
+                     assert.isNotNaN(this.tokendetails.contractData.amount, this.tokendetails.contractData.tokenInfo.tokenAbbr + ' is not NaN')
+                     assert.exists(this.tokendetails.contractData.amount, this.tokendetails.contractData.tokenInfo.tokenAbbr + ' is not null or undefined')
+                 }
+             })
          })
 
         })
@@ -111,7 +124,7 @@ describe('tokens/list',function() {
         cy.get(' div > div.row.mb-3.mt-3 > div > div > div > span > span:nth-child(2)').invoke('text').then(totalCount =>{
             cy.request('https://debugapilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=0&address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
                 .its('body').as('tokendata').then(function (){
-                assert.equal(parseFloat(this.tokendata.total),parseFloat(totalCount.replace(/\D/g, '')),"total equal")
+                assert.equal(parseFloat(this.tokendata.rangeTotal),parseFloat(totalCount.replace(/\D/g, '')),"total equal")
                 for(let i in arr) {
                     for (let j in this.tokendata.data) {
                         if (arr[i] == this.tokendata.data[j].tokenInfo.tokenId)  {
@@ -129,7 +142,7 @@ describe('tokens/list',function() {
         cy.get(' div > div.row.mb-3.mt-3 > div > div > div > span > span:nth-child(2)').invoke('text').then(totalCount => {
             cy.request('https://debugapilist.tronscan.org/api/token_trc20/transfers?limit=20&start=0&sort=-timestamp&count=true&relatedAddress=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
                 .its('body').as('TRC20').then(function () {
-                assert.equal(parseFloat(this.TRC20.total), parseFloat(totalCount.replace(/\D/g, '')), "total equal")
+                assert.equal(parseFloat(this.TRC20.rangeTotal), parseFloat(totalCount.replace(/\D/g, '')), "total equal")
                 for (let i in arr) {
                     for (let j in this.TRC20.token_transfers) {
                         if (arr[i] == this.TRC20.token_transfers[j].tokenInfo.tokenId) {
