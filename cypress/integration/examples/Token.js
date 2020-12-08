@@ -20,8 +20,8 @@ describe('tokens/list',function() {
         cy.wait(1000)
         cy.get('div > table > tbody > tr:nth-child(2) > td:nth-child(4) > div').invoke('text').then( price => {
             cy.wait(600)
-            expect(price.slice(0,1)).is.not.empty
-            expect(price.slice(0,1)).is.not.equals('NaN')
+            assert.exists(price.slice(0,1), ' is not null or undefined')
+            assert.isNotNaN(price.slice(0,1), ' is not NaN')
             cy.request('https://apilist.tronscan.org/api/tokens/overview?start=0&limit=20&order=desc&filter=all&sort=marketcap&order_current=descend').its('body').as('btt1').then(function () {
                 cy.log('price.slice(0, 5)*1=====',parseFloat(price.slice(0, 5)))
                 if (price.slice(0,1) != 0){
@@ -29,8 +29,8 @@ describe('tokens/list',function() {
                 }
             })
             cy.get('div > table > tbody > tr:nth-child(6) > td:nth-child(4) > div').invoke('text').then(pri => {
-                expect(pri).is.not.empty
-                expect(pri).to.equal(price)
+                assert.exists(pri, ' is not null or undefined')
+                assert.isNotNaN(pri, ' is not NaN')
             })
         })
 
@@ -41,12 +41,12 @@ describe('tokens/list',function() {
         cy.wait(1000)
         cy.get('div > table > tbody > tr:nth-child(1) > td:nth-child(4) > div').invoke('text').then( price =>{
             cy.wait(600)
-            expect(price).is.not.empty
+            assert.exists(price, ' is not null or undefined')
             cy.request('https://apilist.tronscan.org/api/token/price?token=trx').its('body').as('token1').then(function () {
                 expect(Math.abs(parseFloat(this.token1.percent_change_24h.slice(0,6)).toFixed(2))).to.equal(parseFloat(price.slice(1,5)))
             })
             cy.get('.currentCurrencyMobile > span').invoke('text').then(pri => {
-                expect(pri).is.not.empty
+                assert.exists(pri, ' is not null or undefined')
                 expect(pri.slice(1,7)).to.equal(price)
             })
         })
@@ -54,43 +54,43 @@ describe('tokens/list',function() {
         cy.wait(600)
         //列表中的转账数文案
         cy.get(':nth-child(1) > :nth-child(5) > [style="width: calc(100% - 150px);"] > div > span').invoke('text').then(tranfer =>{
-            expect(tranfer.slice(0,-4)).is.not.empty
-            expect(tranfer.slice(0,-4)).is.not.equals('NaN')
+            assert.exists(tranfer.slice(0,-4), ' is not null or undefined')
+            assert.isNotNaN(tranfer.slice(0,-4), ' is not NaN')
             //total中的转账数
         })
         //发行量
         cy.get(':nth-child(2) > [style="width: calc(100% - 150px);"] > div > :nth-child(1)').invoke('text').then(issue =>{
-            expect(issue).is.not.empty
-            expect(issue).is.not.equals('NaN')
+            assert.exists(issue, ' is not null or undefined')
+            assert.isNotNaN(issue, ' is not NaN')
         })
          //流通量
         cy.get(':nth-child(3) > [style="width: calc(100% - 150px);"] > div').invoke('text').then(circulation =>{
-            expect(circulation.slice(0,-4)).is.not.empty
-            expect(circulation.slice(0,-4)).is.not.equals('NaN')
+            assert.exists(circulation.slice(0,-4), ' is not null or undefined')
+            assert.isNotNaN(circulation.slice(0,-4), ' is not NaN')
         })
         //持有者
         cy.get(':nth-child(4) > [style="width: calc(100% - 150px);"] > div > :nth-child(1)').invoke('text').then(user =>{
-            expect(user.slice(0,-2)).is.not.empty
-            expect(user.slice(0,-2)).is.not.equals('NaN')
+            assert.exists(user.slice(0,-2), ' is not null or undefined')
+            assert.isNotNaN(user.slice(0,-2), ' is not NaN')
         })
         //转账数
         cy.get(':nth-child(1) > :nth-child(5) > [style="width: calc(100% - 150px);"] > div > span').invoke('text').then(tranfer =>{
-            expect(tranfer.slice(0,-4)).is.not.empty
-            expect(tranfer.slice(0,-4)).is.not.equals('NaN')
+            assert.exists(tranfer.slice(0,-4), ' is not null or undefined')
+            assert.isNotNaN(tranfer.slice(0,-4), ' is not NaN')
         })
         //价格
         cy.get(':nth-child(6) > [style="width: calc(100% - 150px);"] > :nth-child(1) > .d-flex').invoke('text').then(price =>{
-            expect(price.slice(0,8)).is.not.empty
-            expect(price.slice(0,8)).is.not.equals('NaN')
+            assert.exists(price.slice(0,8), ' is not null or undefined')
+            assert.isNotNaN(price.slice(0,8), ' is not NaN')
         })
         //流通市值/总市值
         cy.get(':nth-child(7) > [style="width: calc(100% - 150px);"] > div > :nth-child(1) > span').invoke('text').then(circprice =>{
-            expect(circprice).is.not.empty
-            expect(circprice).is.not.equals('NaN')
+            assert.exists(circprice, ' is not null or undefined')
+            assert.isNotNaN(circprice, ' is not NaN')
         })
         cy.get(':nth-child(7) > [style="width: calc(100% - 150px);"] > div > :nth-child(2) > span').invoke('text').then(totalprice =>{
-            expect(totalprice).is.not.empty
-            expect(totalprice).is.not.equals('NaN')
+            assert.exists(totalprice, ' is not null or undefined')
+            assert.isNotNaN(totalprice, ' is not NaN')
         })
     })
 
