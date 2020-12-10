@@ -76,26 +76,26 @@ describe('tokens/list',function() {
                  }
 
              })
-             // //最后一页数据
-             // cy.get('div.card-header.list-style-body__header > ul > li:nth-child(2) > a > span > span').click()
-             // cy.wait(600)
+             //最后一页数据
+             cy.get('div.card-header.list-style-body__header > ul > li:nth-child(2) > a > span > span').click()
+             cy.wait(600)
              // cy.get('div:nth-child(2) > div > div > div > div > ul > li.ant-pagination-item.ant-pagination-item-500.ant-pagination-item-active').click()
              // cy.wait(600)
-             // cy.request('https://debugapilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=20&start=9980&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
-             //     .its('body').as('tokendatalast').then(function (){
-             //     cy.log(parseFloat(this.tokendatalast.rangeTotal))
-             //     // assert.equal(parseFloat(this.tokendatalast.rangeTotal),parseFloat(totalCount.replace(/\D/g, '')),"vals equal")
-             //     for(let i in arr) {
-             //         for (let j in this.tokendatalast.data) {
-             //             if (arr[i] == this.tokendatalast.data[j].tokenInfo.tokenId)  {
-             //                 assert.equal(this.tokendatalast.data[j].tokenInfo.vip, true, "token简称:" + this.tokendatalast.data[j].tokenInfo.tokenAbbr
-             //                     + " id:" + this.tokendatalast.data[j].tokenInfo.tokenId)
-             //             }
-             //             assert.isNotNaN(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].tokenInfo.tokenAbbr+' is not NaN')
-             //             assert.exists(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].tokenInfo.tokenAbbr +' is not null or undefined')
-             //         }
-             //     }
-             // })
+             cy.request('https://debugapilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=20&start=9980&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
+                 .its('body').as('tokendatalast').then(function (){
+                 cy.log(parseFloat(this.tokendatalast.rangeTotal))
+                 // assert.equal(parseFloat(this.tokendatalast.rangeTotal),parseFloat(totalCount.replace(/\D/g, '')),"vals equal")
+                 for(let i in arr) {
+                     for (let j in this.tokendatalast.data) {
+                         if (arr[i] == this.tokendatalast.data[j].tokenInfo.tokenId)  {
+                             assert.equal(this.tokendatalast.data[j].tokenInfo.vip, true, "token简称:" + this.tokendatalast.data[j].tokenInfo.tokenAbbr
+                                 + " id:" + this.tokendatalast.data[j].tokenInfo.tokenId)
+                         }
+                         assert.isNotNaN(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].tokenInfo.tokenAbbr+' is not NaN')
+                         assert.exists(this.tokendatalast.data[j].amount, this.tokendatalast.data[j].tokenInfo.tokenAbbr +' is not null or undefined')
+                     }
+                 }
+             })
          })
 
         })
@@ -109,7 +109,7 @@ describe('tokens/list',function() {
             .invoke('text').then(totalCount =>{
             cy.request('https://debugapilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=0&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
                 .its('body').as('tokendata').then(function (){
-                assert.equal(parseFloat(this.tokendata.rangeTotal),parseFloat(totalCount.replace(/\D/g, '')),"total equal")
+                // assert.equal(parseFloat(this.tokendata.rangeTotal),parseFloat(totalCount.replace(/\D/g, '')),"total equal")
                 for(let i in arr) {
                     for (let j in this.tokendata.data) {
                         if (arr[i] == this.tokendata.data[j].tokenInfo.tokenId)  {
@@ -124,10 +124,10 @@ describe('tokens/list',function() {
         })
         //TRC20转账
         cy.get(' div > div:nth-child(1) > div > div > label:nth-child(2) > span:nth-child(2) > span').click()
-        cy.get(' div > div.row.mb-3.mt-3 > div > div > div > section > span:nth-child(2)').invoke('text').then(totalCount => {
+        // cy.get(' div > div.row.mb-3.mt-3 > div > div > div > section > span:nth-child(2)').invoke('text').then(totalCount => {
             cy.request('https://debugapilist.tronscan.org/api/token_trc20/transfers?limit=20&start=0&sort=-timestamp&count=true&relatedAddress=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
                 .its('body').as('TRC20').then(function () {
-                assert.equal(parseFloat(this.TRC20.rangeTotal), parseFloat(totalCount.replace(/\D/g, '')), "total equal")
+                // assert.equal(parseFloat(this.TRC20.rangeTotal), parseFloat(totalCount.replace(/\D/g, '')), "total equal")
                 for (let i in arr) {
                     for (let j in this.TRC20.token_transfers) {
                         if (arr[i] == this.TRC20.token_transfers[j].tokenInfo.tokenId) {
@@ -139,7 +139,7 @@ describe('tokens/list',function() {
                     }
                 }
             })
-        })
+        // })
 
     })
 
@@ -164,7 +164,7 @@ describe('tokens/list',function() {
             }
         })
         //内部交易详情
-        cy.get(' table > tbody > tr:nth-child(1) > td:nth-child(1) > div > span > a > div').click()
+        // cy.get(' table > tbody > tr:nth-child(1) > td:nth-child(1) > div > span > a > div').click()
         cy.wait(600)
         cy.request('https://debugapilist.tronscan.org/api/transaction-info?hash=130efc9d3b5bbde00db790b5c6fec299e7a054b3e1702cc8434e48e1521d8d25')
             .its('body').as('tokendata').then(function (){
@@ -176,7 +176,7 @@ describe('tokens/list',function() {
                     assert.isNotNaN(this.tokendata.contractData.call_value, this.tokendata.contractData.tokenInfo.tokenAbbr+' is not NaN')
                     assert.exists(this.tokendata.contractData.call_value, this.tokendata.contractData.tokenInfo.tokenAbbr +' is not null or undefined')
                 }
-
+            assert.exists(this.tokendata.contract_map, this.tokendata.hash +' is not null or undefined')
         })
         })
 
