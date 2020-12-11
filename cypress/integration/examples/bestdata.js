@@ -195,4 +195,64 @@ describe('data/bestdata/contract', () => {
                 }
             })
         })
+    let arr=[
+        "TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR",
+        "TKfjV9RNKJJCqPvBtK8L7Knykh7DNWvnYt",
+        "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9",
+        "THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF",
+        "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+        "1002000",
+        "TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7",
+        "TMwFHYXLJaRUPeW6421aqXL4ZEzPRFGkGT",
+        "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9",
+        "TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9",
+        "TDyvndWuvX5xTBwHPYJi7J3Yq8pq8yh62h",
+        "TKttnV3FSY1iEoAwB4N52WK2DxdV94KpSd",
+        "TVgAYofpQku5G4zenXnvxhbZxpzzrk8WVK",
+
+    ]
+    it('最佳数据-通证加V标识',function (){
+        cy.visit('https://debug.tronscan.org/#/data/bestdata/token')
+        cy.request('https://debugapilist.tronscan.org/api/top10?type=7,8,9,10&time=1')
+            .its('body').as('dataVip').then(function (){
+            for(let i in arr) {
+                for (let j in this.dataVip[0].data) {
+                    if (arr[i] == this.dataVip[0].data[j].token_id)  {
+                        assert.equal(this.dataVip[0].data[j].vip, true, "token简称:" + this.dataVip[0].data[j].abbr
+                            + " id:" + this.dataVip[0].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[0].data[j].holders, this.dataVip[0].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[0].data[j].holders, this.dataVip[0].data[j].abbr +' is not null or undefined')
+                }
+
+                for (let j in this.dataVip[1].data) {
+                    if (arr[i] == this.dataVip[1].data[j].token_id)  {
+                        assert.equal(this.dataVip[1].data[j].vip, true, "token简称:" + this.dataVip[1].data[j].abbr
+                            + " id:" + this.dataVip[1].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[1].data[j].address_number, this.dataVip[1].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[1].data[j].address_number, this.dataVip[1].data[j].abbr +' is not null or undefined')
+                }
+
+                for (let j in this.dataVip[2].data) {
+                    if (arr[i] == this.dataVip[2].data[j].token_id)  {
+                        assert.equal(this.dataVip[2].data[j].vip, true, "token简称:" + this.dataVip[2].data[j].abbr
+                            + " id:" + this.dataVip[2].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[2].data[j].transaction_number, this.dataVip[2].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[2].data[j].transaction_number, this.dataVip[2].data[j].abbr +' is not null or undefined')
+                }
+
+                for (let j in this.dataVip[3].data) {
+                    if (arr[i] == this.dataVip[3].data[j].token_id)  {
+                        assert.equal(this.dataVip[3].data[j].vip, true, "token简称:" + this.dataVip[3].data[j].abbr
+                            + " id:" + this.dataVip[3].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[3].data[j].amount, this.dataVip[3].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[3].data[j].amount, this.dataVip[3].data[j].abbr +' is not null or undefined')
+                }
+            }
+        })
+
+    })
     })

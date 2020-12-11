@@ -16,8 +16,8 @@ describe('tokens/list',function() {
 
     ]
     it('账户-通证余额token加Vip通证',function (){
-        cy.visit('https://debug.tronscan.org/#/address/TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
-        cy.request('https://debugapilist.tronscan.org/api/account?address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
+        cy.visit('https://tronscan.org/#/address/TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
+        cy.request('https://apilist.tronscan.org/api/account?address=TWd4WrZ9wn84f5x1hZhL4DHvk738ns5jwb')
             .its('body').as('trctoken').then(function (){
             for(let i in arr){
                 for(let j in this.trctoken.trc20token_balances){
@@ -50,7 +50,7 @@ describe('tokens/list',function() {
     })
 
      it('账户-交易页面',function (){
-        cy.visit('https://debug.tronscan.org/#/blockchain/accounts')
+        cy.visit('https://tronscan.org/#/blockchain/accounts')
         cy.wait(600)
         cy.get('div > table > tbody > tr:nth-child(2) > td:nth-child(2) > div').click()
          cy.wait(600)
@@ -59,7 +59,7 @@ describe('tokens/list',function() {
          })
          cy.get('div.col-md-7.address-info > table > tbody > tr:nth-child(6) > td > a > span > span').invoke('text').then(totalCount =>{
              assert.exists(totalCount, totalCount +'is not null or undefined')
-             cy.request('https://debugapilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=20&start=0&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
+             cy.request('https://apilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=20&start=0&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
                  .its('body').as('tokendata').then(function (){
                  cy.log(parseFloat(this.tokendata.rangeTotal))
                  // assert.equal(parseFloat(this.tokendata.rangeTotal),parseFloat(totalCount.replace(/\D/g, '')),"vals equal")
@@ -81,7 +81,7 @@ describe('tokens/list',function() {
              cy.wait(600)
              // cy.get('div:nth-child(2) > div > div > div > div > ul > li.ant-pagination-item.ant-pagination-item-500.ant-pagination-item-active').click()
              // cy.wait(600)
-             cy.request('https://debugapilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=20&start=9980&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
+             cy.request('https://apilist.tronscan.org/api/transaction?sort=-timestamp&count=true&limit=20&start=9980&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
                  .its('body').as('tokendatalast').then(function (){
                  cy.log(parseFloat(this.tokendatalast.rangeTotal))
                  // assert.equal(parseFloat(this.tokendatalast.rangeTotal),parseFloat(totalCount.replace(/\D/g, '')),"vals equal")
@@ -100,14 +100,14 @@ describe('tokens/list',function() {
 
         })
     it('账户-转账页面',function (){
-        cy.visit('https://debug.tronscan.org/#/blockchain/accounts')
+        cy.visit('https://tronscan.org/#/blockchain/accounts')
         cy.get('div > table > tbody > tr:nth-child(2) > td:nth-child(2) > div').click()
         cy.wait(600)
         cy.get('div.card-header.list-style-body__header > ul > li:nth-child(3) > a > span > span').click()
         cy.wait(600)
         cy.get('div.card-body.p-0.list-style-body__body > div > div.row.mb-3.mt-3 > div > div > div > section > span:nth-child(2)')
             .invoke('text').then(totalCount =>{
-            cy.request('https://debugapilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=0&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
+            cy.request('https://apilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=0&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
                 .its('body').as('tokendata').then(function (){
                 // assert.equal(parseFloat(this.tokendata.rangeTotal),parseFloat(totalCount.replace(/\D/g, '')),"total equal")
                 for(let i in arr) {
@@ -125,7 +125,7 @@ describe('tokens/list',function() {
         //TRC20转账
         cy.get(' div > div:nth-child(1) > div > div > label:nth-child(2) > span:nth-child(2) > span').click()
         // cy.get(' div > div.row.mb-3.mt-3 > div > div > div > section > span:nth-child(2)').invoke('text').then(totalCount => {
-            cy.request('https://debugapilist.tronscan.org/api/token_trc20/transfers?limit=20&start=0&sort=-timestamp&count=true&relatedAddress=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
+            cy.request('https://apilist.tronscan.org/api/token_trc20/transfers?limit=20&start=0&sort=-timestamp&count=true&relatedAddress=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
                 .its('body').as('TRC20').then(function () {
                 // assert.equal(parseFloat(this.TRC20.rangeTotal), parseFloat(totalCount.replace(/\D/g, '')), "total equal")
                 for (let i in arr) {
@@ -144,12 +144,12 @@ describe('tokens/list',function() {
     })
 
     it('账户-内部交易页面',function (){
-        cy.visit('https://debug.tronscan.org/#/blockchain/accounts')
+        cy.visit('https://tronscan.org/#/blockchain/accounts')
         cy.get('div > table > tbody > tr:nth-child(2) > td:nth-child(2) > div').click()
         cy.wait(600)
         cy.get('div.card-header.list-style-body__header > ul > li:nth-child(4) > a > span > span').click()
         cy.wait(600)
-        cy.request('https://debugapilist.tronscan.org/api/internal-transaction?limit=20&start=0&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
+        cy.request('https://apilist.tronscan.org/api/internal-transaction?limit=20&start=0&address=TNaRAoLUyYEV2uF7GUrzSjRQTU8v5ZJ5VR')
             .its('body').as('tokendata').then(function (){
             assert.equal(parseFloat(this.tokendata.total),parseFloat(this.tokendata.data.length),"total equal")
             for(let i in arr) {
@@ -166,7 +166,7 @@ describe('tokens/list',function() {
         //内部交易详情
         // cy.get(' table > tbody > tr:nth-child(1) > td:nth-child(1) > div > span > a > div').click()
         cy.wait(600)
-        cy.request('https://debugapilist.tronscan.org/api/transaction-info?hash=130efc9d3b5bbde00db790b5c6fec299e7a054b3e1702cc8434e48e1521d8d25')
+        cy.request('https://apilist.tronscan.org/api/transaction-info?hash=130efc9d3b5bbde00db790b5c6fec299e7a054b3e1702cc8434e48e1521d8d25')
             .its('body').as('tokendata').then(function (){
             for(let i in arr) {
                     if (arr[i] == this.tokendata.contractData.tokenInfo.tokenId)  {
