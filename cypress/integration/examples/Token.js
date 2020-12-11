@@ -95,8 +95,8 @@ describe('tokens/list',function() {
     })
 
     it('通证概览-加Vip通证',function (){
-        cy.visit('https://debug.tronscan.org/#/tokens/list')
-        cy.request('https://debugapilist.tronscan.org/api/tokens/overview?start=0&limit=20&order=desc&filter=all&sort=marketcap&order_current=descend')
+        cy.visit('https://tronscan.org/#/tokens/list')
+        cy.request('https://apilist.tronscan.org/api/tokens/overview?start=0&limit=20&order=desc&filter=all&sort=marketcap&order_current=descend')
             .its('body').as('tokenVip').then(function (){
             cy.log(this.tokenVip.tokens[0].tokenType)
             for(let i in arr){
@@ -112,8 +112,8 @@ describe('tokens/list',function() {
     })
 
     it('首页-热门通证加Vip',function (){
-        cy.visit('https://debug.tronscan.org/#/searchmore')
-        cy.request('https://debugapilist.tronscan.org/api/search/hot')
+        cy.visit('https://tronscan.org/#/searchmore')
+        cy.request('https://apilist.tronscan.org/api/search/hot')
             .its('body').as('hotVip').then(function (){
             cy.log(this.hotVip.hot_tokens[0].tokenType)
             for(let i in arr){

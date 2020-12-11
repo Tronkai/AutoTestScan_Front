@@ -16,9 +16,9 @@ describe('blockchain/transfers',function (){
 
     ]
     it('转账页面',function (){
-        cy.visit('https://debug.tronscan.org/#/blockchain/transfers')
+        cy.visit('https://tronscan.org/#/blockchain/transfers')
         cy.wait(1000)
-        cy.request('https://debugapilist.tronscan.org/api/transfer/statistics').its('body').as('trans').then(function (){
+        cy.request('https://apilist.tronscan.org/api/transfer/statistics').its('body').as('trans').then(function (){
             cy.wait(1000)
             cy.log(this.trans)
             expect(this.trans.lastDayTransfersCount).is.not.equals('')
@@ -27,7 +27,7 @@ describe('blockchain/transfers',function (){
             expect(this.trans.transfersAmount).is.not.equals('')
         })
         //TRX&TRC20转账
-        cy.request('https://debugapilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=0&start_timestamp=1529856000000&end_timestamp=1607581831391')
+        cy.request('https://apilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=0&start_timestamp=1529856000000&end_timestamp=1607581831391')
             .its('body').as('star0').then(function (){
              cy.log(this.star0.data[0])
              expect(this.star0.data.length).equals(20)
@@ -43,7 +43,7 @@ describe('blockchain/transfers',function (){
             }
 
         })
-        cy.request('https://debugapilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=9980&start_timestamp=1529856000000&end_timestamp=1607581831391')
+        cy.request('https://apilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=9980&start_timestamp=1529856000000&end_timestamp=1607581831391')
             .its('body').as('star500').then(function (){
             cy.log(this.star500.data.length)
             expect(this.star500.data.length).equals(20)
@@ -61,7 +61,7 @@ describe('blockchain/transfers',function (){
 
         //TRC20转账
         cy.get('.ant-radio-button-wrapper-checked > span:nth-child(2) > span').click()
-        cy.request('https://debugapilist.tronscan.org/api/token_trc20/transfers?sort=-timestamp&limit=20&start=0&start_timestamp=1529856000000&end_timestamp=1607581831391')
+        cy.request('https://apilist.tronscan.org/api/token_trc20/transfers?sort=-timestamp&limit=20&start=0&start_timestamp=1529856000000&end_timestamp=1607581831391')
             .its('body').as('TRC20star0').then(function (){
             for(let i in arr) {
                 for (let j in this.TRC20star0.token_transfers) {
@@ -75,7 +75,7 @@ describe('blockchain/transfers',function (){
             }
         })
 
-        cy.request('https://debugapilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=9980&start_timestamp=1529856000000&end_timestamp=1607581831391')
+        cy.request('https://apilist.tronscan.org/api/transfer?sort=-timestamp&count=true&limit=20&start=9980&start_timestamp=1529856000000&end_timestamp=1607581831391')
             .its('body').as('TRC20star500').then(function (){
             for(let i in arr) {
                 for (let j in this.TRC20star500.token_transfers) {

@@ -1,9 +1,9 @@
 describe('blockchain/blocks',function (){
     it('区块页面', function () {
-        cy.visit('https://debug.tronscan.org/#/blockchain/blocks')
+        cy.visit('https://tronscan.org/#/blockchain/blocks')
         cy.wait(1000)
         cy.get(' div.list-header.d-none.d-md-block > div > span:nth-child(5)').invoke('text').then(totalCount => {
-            cy.request('https://debugapilist.tronscan.org/api/block?sort=-number&limit=20&count=true&start=0&start_timestamp=&end_timestamp=')
+            cy.request('https://apilist.tronscan.org/api/block?sort=-number&limit=20&count=true&start=0&start_timestamp=&end_timestamp=')
                 .its('body').as('blacks').then(function () {
                 cy.wait(1000)
                 assert.equal(parseFloat(this.blacks.total),parseFloat(totalCount.replace(/\D/g, '')),"total equal")
@@ -28,7 +28,7 @@ describe('blockchain/blocks',function (){
         })
        cy.get(' div > table > tbody > tr:nth-child(1) > td.ant_table.table-first-padding > a').click()
         cy.get('div.table-responsive > table > tbody > tr:nth-child(5) > td').invoke('text').then(tranfCount => {
-            cy.request('https://debugapilist.tronscan.org/api/block?sort=-number&limit=20&count=true&start=0&start_timestamp=&end_timestamp=')
+            cy.request('https://apilist.tronscan.org/api/block?sort=-number&limit=20&count=true&start=0&start_timestamp=&end_timestamp=')
                 .its('body').as('transferblacks').then(function () {
                 assert.equal(parseFloat(this.transferblacks.total),parseFloat(totalCount.slice(0,-4)),"total equal")
                 assert.exists(this.transferblacks.data.length, ' is not null or undefined')
@@ -48,7 +48,7 @@ describe('blockchain/blocks',function (){
         })
         //区块转账
         cy.get('div.card-header.list-style-body__header > ul > li:nth-child(2) > a > span > span').click()
-            cy.request('https://debugapilist.tronscan.org/api/block?sort=-number&limit=20&count=true&start=0&start_timestamp=&end_timestamp=')
+            cy.request('https://apilist.tronscan.org/api/block?sort=-number&limit=20&count=true&start=0&start_timestamp=&end_timestamp=')
                 .its('body').as('transactionblacks').then(function () {
                 assert.exists(this.transactionblacks.data.length, ' is not null or undefined')
                 for(let i in arr) {
