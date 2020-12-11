@@ -212,8 +212,91 @@ describe('data/bestdata/contract', () => {
 
     ]
     it('最佳数据-通证加V标识',function (){
-        cy.visit('https://debug.tronscan.org/#/data/bestdata/token')
-        cy.request('https://debugapilist.tronscan.org/api/top10?type=7,8,9,10&time=1')
+        cy.visit('https://tronscan.org/#/data/bestdata/token')
+        //小时
+        cy.request('https://apilist.tronscan.org/api/top10?type=7,8,9,10&time=1')
+            .its('body').as('dataVip').then(function (){
+            for(let i in arr) {
+                for (let j in this.dataVip[0].data) {
+                    if (arr[i] == this.dataVip[0].data[j].token_id)  {
+                        assert.equal(this.dataVip[0].data[j].vip, true, "token简称:" + this.dataVip[0].data[j].abbr
+                            + " id:" + this.dataVip[0].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[0].data[j].holders, this.dataVip[0].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[0].data[j].holders, this.dataVip[0].data[j].abbr +' is not null or undefined')
+                }
+
+                for (let j in this.dataVip[1].data) {
+                    if (arr[i] == this.dataVip[1].data[j].token_id)  {
+                        assert.equal(this.dataVip[1].data[j].vip, true, "token简称:" + this.dataVip[1].data[j].abbr
+                            + " id:" + this.dataVip[1].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[1].data[j].address_number, this.dataVip[1].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[1].data[j].address_number, this.dataVip[1].data[j].abbr +' is not null or undefined')
+                }
+
+                for (let j in this.dataVip[2].data) {
+                    if (arr[i] == this.dataVip[2].data[j].token_id)  {
+                        assert.equal(this.dataVip[2].data[j].vip, true, "token简称:" + this.dataVip[2].data[j].abbr
+                            + " id:" + this.dataVip[2].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[2].data[j].transaction_number, this.dataVip[2].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[2].data[j].transaction_number, this.dataVip[2].data[j].abbr +' is not null or undefined')
+                }
+
+                for (let j in this.dataVip[3].data) {
+                    if (arr[i] == this.dataVip[3].data[j].token_id)  {
+                        assert.equal(this.dataVip[3].data[j].vip, true, "token简称:" + this.dataVip[3].data[j].abbr
+                            + " id:" + this.dataVip[3].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[3].data[j].amount, this.dataVip[3].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[3].data[j].amount, this.dataVip[3].data[j].abbr +' is not null or undefined')
+                }
+            }
+        })
+        //天
+        cy.request('https://apilist.tronscan.org/api/top10?type=7,8,9,10&time=2')
+            .its('body').as('dataVip').then(function (){
+            for(let i in arr) {
+                for (let j in this.dataVip[0].data) {
+                    if (arr[i] == this.dataVip[0].data[j].token_id)  {
+                        assert.equal(this.dataVip[0].data[j].vip, true, "token简称:" + this.dataVip[0].data[j].abbr
+                            + " id:" + this.dataVip[0].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[0].data[j].holders, this.dataVip[0].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[0].data[j].holders, this.dataVip[0].data[j].abbr +' is not null or undefined')
+                }
+
+                for (let j in this.dataVip[1].data) {
+                    if (arr[i] == this.dataVip[1].data[j].token_id)  {
+                        assert.equal(this.dataVip[1].data[j].vip, true, "token简称:" + this.dataVip[1].data[j].abbr
+                            + " id:" + this.dataVip[1].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[1].data[j].address_number, this.dataVip[1].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[1].data[j].address_number, this.dataVip[1].data[j].abbr +' is not null or undefined')
+                }
+
+                for (let j in this.dataVip[2].data) {
+                    if (arr[i] == this.dataVip[2].data[j].token_id)  {
+                        assert.equal(this.dataVip[2].data[j].vip, true, "token简称:" + this.dataVip[2].data[j].abbr
+                            + " id:" + this.dataVip[2].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[2].data[j].transaction_number, this.dataVip[2].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[2].data[j].transaction_number, this.dataVip[2].data[j].abbr +' is not null or undefined')
+                }
+
+                for (let j in this.dataVip[3].data) {
+                    if (arr[i] == this.dataVip[3].data[j].token_id)  {
+                        assert.equal(this.dataVip[3].data[j].vip, true, "token简称:" + this.dataVip[3].data[j].abbr
+                            + " id:" + this.dataVip[3].data[j].token_id)
+                    }
+                    assert.isNotNaN(this.dataVip[3].data[j].amount, this.dataVip[3].data[j].abbr+' is not NaN')
+                    assert.exists(this.dataVip[3].data[j].amount, this.dataVip[3].data[j].abbr +' is not null or undefined')
+                }
+            }
+        })
+        //周
+        cy.request('https://apilist.tronscan.org/api/top10?type=7,8,9,10&time=3')
             .its('body').as('dataVip').then(function (){
             for(let i in arr) {
                 for (let j in this.dataVip[0].data) {
@@ -254,5 +337,5 @@ describe('data/bestdata/contract', () => {
             }
         })
 
-    })
+     })
     })
