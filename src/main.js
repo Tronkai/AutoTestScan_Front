@@ -6,7 +6,7 @@ import './plugins/element.js'
 import axios from 'axios';
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false;
-axios.defaults.baseURL = 'http://39.105.200.151:3000';
+axios.defaults.baseURL = 'http://127.0.0.1:5000';
 new Vue({
   router,
   render: h => h(App)

@@ -2,10 +2,10 @@
   <div class="home">
 <el-row :gutter="12">
 
-<el-col :span="12">
+<el-col :span="24">
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
-    <img style="width:18px;height:18px;margin-right:8px;margin-right:8px" src="../assets/tronscan.png"><span>TRONSCAN API</span>
+    <img style="width:18px;height:18px;margin-right:8px;margin-right:8px" src="../assets/tronscan.png"><span>TRONSCAN</span>
     <router-link to="/tronscanapi"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>
   </div>
       <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronscanapi" :key = "item" class="text item">
@@ -13,29 +13,35 @@
     <div style="margin-left:7px;margin-top:10px;margin-bottom:-30px">
       <span>最近一次执行情况</span>
       <br>
-      <span>成功用例数:{{tronscanapi[0].sucessnum}}</span>
+      <span>进行中项目数:{{tronscanapi[0].sucessnum}}</span>
       <br>
-      <span>失败用例数:{{tronscanapi[0].failnum}}</span>
+      <span>进行中项目数:{{tronscanapi[0].failnum}}</span>
       </div>
     </div>
   </div>
       <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>
 
-  <div style="float: left;margin-left:30px;margin-top:15px">
-                <h4>当天执行情况</h4>
-                <span>总执行次数：{{tronscanapiToday.todaysum}}次</span>
+  <div style="float: left;margin-left:30px;margin-top:45px">
+                <span>进行中项目数：{{tronscanapiToday.todaysum}}次</span>
                       <br><br>
-                <span>总成功次数：{{tronscanapiToday.todaysucess}}次</span>
+                <span>已完成项目数：{{tronscanapiToday.todaysucess}}次</span>
                       <br><br>
                 <span>总失败次数：{{tronscanapiToday.todayfail}}次</span>
   </div>
+      <div style="float: left;margin-left:180px;margin-top:45px">
+        <span>进行中项目数：{{tronscanapiToday.todaysum}}次</span>
+        <br><br>
+        <span>已完成项目数：{{tronscanapiToday.todaysucess}}次</span>
+        <br><br>
+        <span>总失败次数：{{tronscanapiToday.todayfail}}次</span>
+      </div>
   <div>
   </div>
 </el-card>
   </el-col>
 
-  
-<el-col :span="12">
+
+<el-col :span="24">
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
     <img style="width:18px;height:18px;margin-right:8px;margin-right:8px" src="../assets/tronscan.png"><span>TRONSCAN UI</span>
@@ -70,7 +76,7 @@
   </el-col>
 
 
-<el-col :span="12">
+<el-col :span="24">
     <el-card v-show="tronlinkui[0]" class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
     <img style="width:18px;height:18px;margin-right:8px" src="../assets/tronlink.png"><span>TRONLINK UI</span>
@@ -88,7 +94,7 @@
     </div>
   </div>
       <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>
-    
+
   <div style="float: left;margin-left:30px;margin-top:30px">
   <h4>当天执行情况</h4>
                 <span>总执行次数：{{tronlinkuiToday.todaysum}}次</span>
@@ -104,7 +110,7 @@
   </el-col>
 
 
-<el-col :span="12">
+<el-col :span="24">
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
     <img style="width:18px;height:18px;margin-right:8px" src="../assets/tronlink.png"><span>TRONLINK API</span>
@@ -135,7 +141,7 @@
   </div>
   </el-card>
   </el-col>
-  <el-col :span="12">
+  <el-col :span="24">
     <el-card class="box-card" shadow="hover">
       <div slot="header" class="clearfix">
     <img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png"><span>DJED API</span>
@@ -186,7 +192,7 @@
     </div>
   </div>
       <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>
-    
+
   <div style="float: left;margin-left:30px;margin-top:30px">
           <h4>当天执行情况</h4>
                 <span>总执行次数：{{djeduiToday.todaysum}}次</span>
@@ -238,7 +244,7 @@
         tronlinkapiToday :[{}],
         djedapiToday :[{}],
         djeduiToday :[{}],
-      
+
       }
     },
     methods:{

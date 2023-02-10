@@ -1,21 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import TronscanUI from '../views/TronscanUI.vue'
-import TronscanAPI from '../views/TronscanAPI.vue'
-import TronlinkAPI from '../views/TronlinkAPI.vue'
-import TronlinkUI from '../views/TronlinkUI.vue'
-import DjedAPI from '../views/DjedAPI.vue'
-import DjedUI from '../views/DjedUI.vue'
+// import Home from '../views/Home.vue'
+import Tronscan from '../views/Tronscan.vue'
+import BTTC from '../views/BTTC.vue'
+import TronlinkAndroid from '../views/TronlinkAndroid.vue'
+import TronlinkiOS from '../views/TronlinkiOS.vue'
+import TronlinkServer from '../views/TronlinkServer.vue'
+import USDD from '../views/USDD.vue'
+import JustlendDao from '../views/JustlendDao.vue'
 import Scan from '../views/Scan.vue'
 import Login from '../components/Login.vue'
+import TronlinkExtension from '../views/TronlinkExtension.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'BTTC',
+    component: BTTC
   },
   {
     path: '/scan',
@@ -23,34 +25,44 @@ const routes = [
     component: Scan
   },
   {
-    path: '/tronscanui',
-    name: 'TronscanUI',
-    component: TronscanUI
+    path: '/tronlinkExtension',
+    name: 'TronlinkExtension',
+    component: TronlinkExtension
   },
   {
-    path: '/tronscanapi',
-    name: 'TronscanAPI',
-    component: TronscanAPI
+    path: '/tronlinkserver',
+    name: 'TronlinkServer',
+    component: TronlinkServer
   },
   {
-    path: '/djedapi',
-    name: 'DjedAPI',
-    component: DjedAPI
+    path: '/tronscan',
+    name: 'Tronscan',
+    component: Tronscan
   },
   {
-    path: '/djedui',
-    name: 'DjedUI',
-    component: DjedUI
+    path: '/tronlinkAndroid',
+    name: 'TronlinkAndroid',
+    component: TronlinkAndroid
   },
   {
-    path: '/tronlinkAPI',
-    name: 'TronlinkAPI',
-    component: TronlinkAPI
+    path: '/bttc',
+    name: 'BTTC',
+    component: BTTC
   },
   {
-    path: '/tronlinkui',
-    name: 'TronlinkUI',
-    component: TronlinkUI
+    path: '/tronlinkiOS',
+    name: 'TronlinkiOS',
+    component: TronlinkiOS
+  },
+  {
+    path: '/usdd',
+    name: 'USDD',
+    component: USDD
+  },
+  {
+    path: '/justlendDao',
+    name: 'JustlendDao',
+    component: JustlendDao
   },
   {
     path: '/login',
