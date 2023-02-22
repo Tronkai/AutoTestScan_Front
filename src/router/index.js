@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import Home from '../views/Home.vue'
+import Home from '../views/Home.vue'
 import Tronscan from '../views/Tronscan.vue'
 import BTTC from '../views/BTTC.vue'
 import TronlinkAndroid from '../views/TronlinkAndroid.vue'
@@ -16,8 +16,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'BTTC',
-    component: BTTC
+    name: 'Home',
+    component: Home
   },
   {
     path: '/scan',

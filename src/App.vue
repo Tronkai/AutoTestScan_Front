@@ -6,58 +6,58 @@
      <el-container>
       <el-aside width="200px" style="background-color: #fff;border-bottom: 1px solid #dcdfe6">
       <el-menu :default-openeds="['2','3','4']" :router="true"  active-text-color="#42b983" style="margin-top:20px;border-right: solid 0px #e6e6e6;">
-<!--        <router-link to="/">-->
-<!--        <el-menu-item index="1">-->
-<!--          <i class="el-icon-menu"></i>-->
-<!--          <span slot="title">整体结果</span>-->
-<!--        </el-menu-item>-->
-<!--        </router-link>-->
+        <router-link to="/">
+        <el-menu-item index="1">
+          <i class="el-icon-menu"></i>
+          <span slot="title">整体结果</span>
+        </el-menu-item>
+        </router-link>
 
         <router-link to="/bttc">
-          <el-menu-item index="2">
+          <el-menu-item index="bttc">
             <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/bttc.png">BTTC</template>
           </el-menu-item>
         </router-link>
 
 
         <router-link to="/justlendDao">
-          <el-menu-item index="3">
+          <el-menu-item index="justlendDao">
             <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/justlendDao.jpg">JustlendDao</template>
           </el-menu-item>
         </router-link>
 
         <router-link to="/tronlinkAndroid">
-          <el-menu-item index="4">
+          <el-menu-item index="tronlinkAndroid">
             <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/tronlink.png">TronlinkAndroid</template>
           </el-menu-item>
         </router-link>
 
         <router-link to="/tronlinkiOS">
-          <el-menu-item index="5">
+          <el-menu-item index="tronlinkiOS">
             <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/tronlink.png">TronlinkiOS</template>
           </el-menu-item>
         </router-link>
 
         <router-link to="/tronlinkServer">
-          <el-menu-item index="6">
+          <el-menu-item index="tronlinkServer">
             <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/tronlink.png">TronlinkServer</template>
           </el-menu-item>
         </router-link>
 
         <router-link to="/tronscan">
-          <el-menu-item index="7">
+          <el-menu-item index="tronscan">
             <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/tronscan.png">Tronscan</template>
           </el-menu-item>
         </router-link>
 
         <router-link to="/usdd">
-          <el-menu-item index="8">
+          <el-menu-item index="usdd">
             <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/usdd.svg">USDD</template>
           </el-menu-item>
         </router-link>
 
         <router-link to="/tronlinkExtension">
-          <el-menu-item index="8">
+          <el-menu-item index="tronlinkExtension">
             <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/tronlink.png">Tronlink插件</template>
           </el-menu-item>
         </router-link>
