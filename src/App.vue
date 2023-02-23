@@ -13,6 +13,12 @@
         </el-menu-item>
         </router-link>
 
+        <router-link to="/javatron">
+          <el-menu-item index="javatron">
+            <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="https://tron.network/static/images/index/ecology/2.png">JavaTron</template>
+          </el-menu-item>
+        </router-link>
+
         <router-link to="/bttc">
           <el-menu-item index="bttc">
             <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/bttc.png">BTTC</template>
@@ -22,7 +28,7 @@
 
         <router-link to="/justlendDao">
           <el-menu-item index="justlendDao">
-            <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/justlendDao.jpg">JustlendDao</template>
+            <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="https://tron.network/static/images/index/ecology/9.png">JustlendDao</template>
           </el-menu-item>
         </router-link>
 
@@ -46,7 +52,7 @@
 
         <router-link to="/tronscan">
           <el-menu-item index="tronscan">
-            <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/tronscan.png">Tronscan</template>
+            <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="https://tron.network/static/images/index/ecology/3.png">Tronscan</template>
           </el-menu-item>
         </router-link>
 
@@ -59,6 +65,42 @@
         <router-link to="/tronlinkExtension">
           <el-menu-item index="tronlinkExtension">
             <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="./assets/tronlink.png">Tronlink插件</template>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/DEFI">
+          <el-menu-item index="DEFI">
+            <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="https://tron.network/static/images/index/ecology/4.png">Defi相关监控</template>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/TRONBOX">
+          <el-menu-item index="TRONBOX">
+            <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="https://tron.network/static/images/index/ecology/4.png">Tronbox</template>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/TRNWB">
+          <el-menu-item index="TRNWB">
+            <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="https://tron.network/static/images/index/ecology/4.png">Tronweb</template>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/WAT">
+          <el-menu-item index="WAT">
+            <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="https://tron.network/static/images/index/ecology/4.png">wallet-adapter-tron</template>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/WTS">
+          <el-menu-item index="WTS">
+            <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="https://tron.network/static/images/index/ecology/4.png">Wallet-Tron SDK</template>
+          </el-menu-item>
+        </router-link>
+
+        <router-link to="/WEB3">
+          <el-menu-item index="WEB3">
+            <template slot="title"><img style="width:18px;height:18px;margin-right:8px" src="https://tron.network/static/images/index/ecology/4.png">web3后台管理</template>
           </el-menu-item>
         </router-link>
 

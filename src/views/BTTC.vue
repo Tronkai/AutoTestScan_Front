@@ -1,10 +1,10 @@
 <template>
   <div>
-    <el-card v-loading="loading" class="big-card" :body-style="{ padding: '0px' }">
+    <el-card shadow="hover" v-loading="loading" class="big-card" :body-style="{ padding: '0px' }">
       <div style="display: flex; justify-content: flex-end; margin-top: 15px ;border-bottom: 1px solid #f0f2f3;padding-bottom: 15px">
-        <span style="margin-right: 190px;margin-top: 8px;font-weight: bold">{{selectedTime}}关键数据</span>
+        <span style="margin-right: 110px;margin-top: 8px;font-weight: 700">{{selectedTime}}关键数据</span>
         <el-button-group class="ml-4">
-          <el-button  class="selected-button" size="large" @click="selectWeek">本周</el-button>
+          <el-button autofocus  class="selected-button" size="large" @click="selectWeek">本周</el-button>
           <el-button  class="selected-button" size="large" @click="selectMonth">本月</el-button>
           <el-button  class="selected-button" size="large" @click="selectQuarter">本季度</el-button>
           <el-button  class="selected-button" size="large" @click="selectYear" >本年</el-button>
@@ -14,29 +14,28 @@
       <el-row  :gutter="20">
         <el-col  :span="12" v-for="item in items" :key="item.name">
           <div class="item-content">
-            <p>{{item.name}}</p>
-            <p>{{item.number}}</p>
+            <p style="color: #91979d;font-size: 14px;text-align:center;margin-right: 80px">{{item.name}}</p>
+            <p style="font-weight: 600;font-size: 15px;text-align:center;margin-right: 80px">{{item.number}}</p>
           </div>
         </el-col>
       </el-row>
     </el-card>
-    <el-card>
-      <el-table :row-class-name="tableRowClassName" v-loading="loading" style="height: 550px"  :data="projects" height="250" border>
-
+    <el-card shadow="hover">
+      <el-table :row-class-name="tableRowClassName" v-loading="loading"  :data="projects" border>
         <el-table-column width="80px" label="时间记录" type="expand">
           <template slot-scope="scope">
-            <el-row :gutter="20">
+            <el-row style="margin-left: 80px" :gutter="20">
               <el-col :span="5">
-                <el-card shadow="never" style="width: 128px;height: 80px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
+                <el-card shadow="never" style="width: 128px;height: 80px"><span style="color: #91979d">项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
               </el-col>
               <el-col :span="5">
-                <el-card shadow="never" style="width: 128px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
+                <el-card shadow="never" style="width: 128px"><span style="color: #91979d">提测时间</span><div>{{ scope.row.testEamilTime }}</div></el-card>
               </el-col>
               <el-col :span="5">
-                <el-card shadow="never" style="width: 128px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
+                <el-card shadow="never" style="width: 128px"><span style="color: #91979d">测试开始时间</span><div>{{ scope.row.testStartTime }}</div></el-card>
               </el-col>
               <el-col :span="5">
-                <el-card shadow="never" style="width: 128px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
+                <el-card shadow="never" style="width: 128px"><span style="color: #91979d">测试完成时间</span><div>{{ scope.row.testEndTime }}</div></el-card>
               </el-col>
 
             </el-row>
@@ -202,7 +201,7 @@ export default {
 <style>
 .big-card {
   width: 856px;
-  height: 350px;
+  height: 340px;
 }
 .item-content {
   margin-left: 100px;
