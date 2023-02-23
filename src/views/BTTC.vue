@@ -21,33 +21,35 @@
       </el-row>
     </el-card>
     <el-card>
-      <el-table v-loading="loading" style="height: 450px"  :data="projects" height="250" border stripe>
+      <el-table :row-class-name="tableRowClassName" v-loading="loading" style="height: 550px"  :data="projects" height="250" border>
 
         <el-table-column width="80px" label="时间记录" type="expand">
           <template slot-scope="scope">
-            <el-form label-position="left" inline class="demo-table-expand">
-              <el-card style="width: 130px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
-              <el-card style="width: 130px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
-              <el-card style="width: 130px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
-              <el-card style="width: 130px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
+            <el-row :gutter="20">
+              <el-col :span="5">
+                <el-card shadow="never" style="width: 128px;height: 80px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
+              </el-col>
+              <el-col :span="5">
+                <el-card shadow="never" style="width: 128px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
+              </el-col>
+              <el-col :span="5">
+                <el-card shadow="never" style="width: 128px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
+              </el-col>
+              <el-col :span="5">
+                <el-card shadow="never" style="width: 128px"><span>项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>
+              </el-col>
 
-            </el-form>
+            </el-row>
           </template>
         </el-table-column>
-
-
-
-
-        <el-table-column  prop="content" label="项目内容" width="420px">
-          <template slot-scope="scope">
+        <el-table-column  prop="content" label="项目内容" width="415px"><template slot-scope="scope">
             <a :href="'https://troneco.atlassian.net/browse/' +scope.row.key">{{ scope.row.content }}</a>
-          </template>
-        </el-table-column>
+          </template></el-table-column>
         <el-table-column prop="status" label="状态" width="80px"></el-table-column>
-        <el-table-column prop="projectStartTime" label="项目开始时间" width="120px"></el-table-column>
-        <el-table-column prop="testEamilTime" label="提测时间" width="120px"></el-table-column>
-        <el-table-column prop="testStartTime" label="测试开始时间" width="120px"></el-table-column>
-        <el-table-column prop="testEndTime" label="测试完成时间" width="120px"></el-table-column>
+<!--        <el-table-column prop="projectStartTime" label="项目开始时间" width="120px"></el-table-column>-->
+<!--        <el-table-column prop="testEamilTime" label="提测时间" width="120px"></el-table-column>-->
+<!--        <el-table-column prop="testStartTime" label="测试开始时间" width="120px"></el-table-column>-->
+<!--        <el-table-column prop="testEndTime" label="测试完成时间" width="120px"></el-table-column>-->
         <el-table-column prop="expectedTime" label="预估上线时间" width="120px"></el-table-column>
         <el-table-column prop="projectEndTime" label="实际上线时间" width="120px"></el-table-column>
       </el-table>
@@ -73,6 +75,13 @@ export default {
     }
   },
   methods: {
+    tableRowClassName({row}) {
+      if (row.status == "已完成"){
+        return 'success-row'
+      }else if (row.status == "需求暂停"){
+        return 'warning-row'
+      }
+    },
     handleSelect(command) {
       this.selectedTime = command;
       if (command === "本周") {
@@ -161,7 +170,6 @@ export default {
           }
         });
         this.projects = response.data;
-        this.loading = false;
       } catch (error) {
         console.error(error);
       }
@@ -177,6 +185,7 @@ export default {
         });
         console.log(response.data)
         this.items = response.data;
+        this.loading = false;
       } catch (error) {
         console.error(error);
       }
@@ -199,4 +208,17 @@ export default {
   margin-left: 100px;
   border-right: 1px solid #ccc;
 }
+
+.el-table .warning-row {
+  background: oldlace;
+}
+
+.el-table .success-row {
+  background: #f0f9eb;
+}
+
+.el-table .doing-row {
+  background: #c6eef8;
+}
+
 </style>
