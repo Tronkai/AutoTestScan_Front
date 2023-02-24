@@ -24,33 +24,25 @@
       <el-table :row-class-name="tableRowClassName" v-loading="loading"  :data="projects" border>
         <el-table-column width="80px" label="时间记录" type="expand">
           <template slot-scope="scope">
-            <el-row style="margin-left: 80px" :gutter="15">
-<!--              <el-col :span="5">-->
-<!--                <el-card shadow="never" style="width: 128px;height: 80px"><span style="color: #91979d">项目开始时间</span><div>{{ scope.row.projectStartTime }}</div></el-card>-->
-<!--              </el-col>-->
-              <el-col :span="8">
-                <el-card shadow="never" style="width: 128px"><span style="color: #91979d">提测时间</span><div>{{ scope.row.testEamilTime }}</div></el-card>
-              </el-col>
-              <el-col :span="8">
-                <el-card shadow="never" style="width: 128px"><span style="color: #91979d">测试开始时间</span><div>{{ scope.row.testStartTime }}</div></el-card>
-              </el-col>
-              <el-col :span="8">
-                <el-card shadow="never" style="width: 128px"><span style="color: #91979d">测试完成时间</span><div>{{ scope.row.testEndTime }}</div></el-card>
-              </el-col>
-
-            </el-row>
+            <el-steps :active="scope.row.active" align-center finish-status="success" process-status="process">
+              <el-step :title="scope.row.testEamilTime" description="提测时间"></el-step>
+              <el-step :title="scope.row.testStartTime" description="测试开始时间"></el-step>
+              <el-step :title="scope.row.testEndTime"  description="测试完成时间"></el-step>
+              <el-step :title="scope.row.projectEndTime" description="实际上线时间"></el-step>
+            </el-steps>
           </template>
         </el-table-column>
-        <el-table-column  prop="content" label="项目内容" width="415px"><template slot-scope="scope">
-          <a :href="'https://troneco.atlassian.net/browse/' +scope.row.key">{{ scope.row.content }}</a>
-        </template></el-table-column>
+        <el-table-column  prop="content" label="项目内容" width="345px"><template slot-scope="scope">
+            <a :href="'https://troneco.atlassian.net/browse/' +scope.row.key">{{ scope.row.content }}</a>
+          </template></el-table-column>
         <el-table-column prop="status" label="状态" width="80px"></el-table-column>
-        <!--        <el-table-column prop="projectStartTime" label="项目开始时间" width="120px"></el-table-column>-->
-        <!--        <el-table-column prop="testEamilTime" label="提测时间" width="120px"></el-table-column>-->
-        <!--        <el-table-column prop="testStartTime" label="测试开始时间" width="120px"></el-table-column>-->
-        <!--        <el-table-column prop="testEndTime" label="测试完成时间" width="120px"></el-table-column>-->
-        <el-table-column prop="expectedTime" label="预估上线时间" width="120px"></el-table-column>
-        <el-table-column prop="projectEndTime" label="实际上线时间" width="120px"></el-table-column>
+<!--        <el-table-column prop="projectStartTime" label="项目开始时间" width="120px"></el-table-column>-->
+<!--        <el-table-column prop="testEamilTime" label="提测时间" width="120px"></el-table-column>-->
+<!--        <el-table-column prop="testStartTime" label="测试开始时间" width="120px"></el-table-column>-->
+<!--        <el-table-column prop="testEndTime" label="测试完成时间" width="120px"></el-table-column>-->
+        <el-table-column prop="expectedTime" label="预估上线时间" width="115px"></el-table-column>
+        <el-table-column prop="projectEndTime" label="实际上线时间" width="115px"></el-table-column>
+        <el-table-column style="text-align:center" prop="businessTime" label="测试周期" width="80px"></el-table-column>
       </el-table>
     </el-card>
 
