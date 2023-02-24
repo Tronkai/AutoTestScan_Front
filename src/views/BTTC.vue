@@ -31,13 +31,6 @@
               <el-step :title="scope.row.testEndTime"  description="测试完成时间"></el-step>
               <el-step :title="scope.row.projectEndTime" description="实际上线时间"></el-step>
             </el-steps>
-            <el-steps :active="scope.row.active" align-center finish-status="success" process-status="process">
-              <el-step :title="scope.row.projectStartTime" description="项目开始时间"></el-step>
-              <el-step :title="scope.row.testEamilTime" description="提测时间"></el-step>
-              <el-step :title="scope.row.testStartTime" description="测试开始时间"></el-step>
-              <el-step :title="scope.row.testEndTime"  description="测试完成时间"></el-step>
-              <el-step :title="scope.row.projectEndTime" description="实际上线时间"></el-step>
-            </el-steps>
           </template>
         </el-table-column>
         <el-table-column  prop="content" label="项目内容" width="345px"><template slot-scope="scope">
