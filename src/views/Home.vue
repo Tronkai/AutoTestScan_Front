@@ -1,323 +1,117 @@
-<!--<template>-->
-<!--  <div class="home">-->
-<!--<el-row :gutter="12">-->
 
-<!--<el-col :span="24">-->
-<!--    <el-card class="box-card" shadow="hover">-->
-<!--      <div slot="header" class="clearfix">-->
-<!--    <img style="width:18px;height:18px;margin-right:8px;margin-right:8px" src="../assets/tronscan.png"><span>TRONSCAN</span>-->
-<!--    <router-link to="/tronscanapi"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>-->
-<!--  </div>-->
-<!--      <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronscanapi" :key = "item" class="text item">-->
-<!--    <el-progress  type="circle" :color="tronscanapi[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(tronscanapi[0].sucessnum/tronscanapi[0].sum*100)"></el-progress>-->
-<!--    <div style="margin-left:7px;margin-top:10px;margin-bottom:-30px">-->
-<!--      <span>最近一次执行情况</span>-->
-<!--      <br>-->
-<!--      <span>进行中项目数:{{tronscanapi[0].sucessnum}}</span>-->
-<!--      <br>-->
-<!--      <span>进行中项目数:{{tronscanapi[0].failnum}}</span>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--      <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>-->
-
-<!--  <div style="float: left;margin-left:30px;margin-top:45px">-->
-<!--                <span>进行中项目数：{{tronscanapiToday.todaysum}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>已完成项目数：{{tronscanapiToday.todaysucess}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>总失败次数：{{tronscanapiToday.todayfail}}次</span>-->
-<!--  </div>-->
-<!--      <div style="float: left;margin-left:180px;margin-top:45px">-->
-<!--        <span>进行中项目数：{{tronscanapiToday.todaysum}}次</span>-->
-<!--        <br><br>-->
-<!--        <span>已完成项目数：{{tronscanapiToday.todaysucess}}次</span>-->
-<!--        <br><br>-->
-<!--        <span>总失败次数：{{tronscanapiToday.todayfail}}次</span>-->
-<!--      </div>-->
-<!--  <div>-->
-<!--  </div>-->
-<!--</el-card>-->
-<!--  </el-col>-->
-
-
-<!--<el-col :span="24">-->
-<!--    <el-card class="box-card" shadow="hover">-->
-<!--      <div slot="header" class="clearfix">-->
-<!--    <img style="width:18px;height:18px;margin-right:8px;margin-right:8px" src="../assets/tronscan.png"><span>TRONSCAN UI</span>-->
-<!--    <router-link to="/tronscanui"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--      <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronscanui" :key = "item" class="text item">-->
-<!--    <el-progress type="circle" :color="tronscanui[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(tronscanui[0].sucessnum/tronscanui[0].sum*100)"></el-progress>-->
-<!--        <div style="margin-left:7px;margin-top:10px;margin-bottom:-30px">-->
-<!--      <span>最近一次执行情况</span>-->
-<!--      <br>-->
-<!--      <span>成功用例数:{{tronscanui[0].sucessnum}}</span>-->
-<!--      <br>-->
-<!--      <span>失败用例数:{{tronscanui[0].failnum}}</span>-->
-<!--      </div>-->
-
-<!--    </div>-->
-<!--  </div>-->
-<!--    </div>-->
-<!--    <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>-->
-<!--  <div style="float: left;margin-left:30px;margin-top:30px">-->
-<!--  <h4>当天执行情况</h4>-->
-<!--                <span>总执行次数：{{tronscanuiToday.todaysum}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>总成功次数：{{tronscanuiToday.todaysucess}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>总失败次数：{{tronscanuiToday.todayfail}}次</span>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--  </div>-->
-<!--</el-card>-->
-<!--  </el-col>-->
-
-
-<!--<el-col :span="24">-->
-<!--    <el-card v-show="tronlinkui[0]" class="box-card" shadow="hover">-->
-<!--      <div slot="header" class="clearfix">-->
-<!--    <img style="width:18px;height:18px;margin-right:8px" src="../assets/tronlink.png"><span>TRONLINK UI</span>-->
-<!--    <router-link to="/tronlinkui"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>-->
-<!--  </div>-->
-<!--      <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronlinkui" :key = "item" class="text item">-->
-<!--    <el-progress type="circle" :color="tronlinkui[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(tronlinkui[0].sucessnum/tronlinkui[0].sum*100)"></el-progress>-->
-<!--  <div style="margin-left:7px;margin-top:10px;margin-bottom:-30px">-->
-<!--      <span>最近一次执行情况</span>-->
-<!--      <br>-->
-<!--      <span>成功用例数:{{tronlinkui[0].sucessnum}}</span>-->
-<!--      <br>-->
-<!--      <span>失败用例数:{{tronlinkui[0].failnum}}</span>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--      <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>-->
-
-<!--  <div style="float: left;margin-left:30px;margin-top:30px">-->
-<!--  <h4>当天执行情况</h4>-->
-<!--                <span>总执行次数：{{tronlinkuiToday.todaysum}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>总成功次数：{{tronlinkuiToday.todaysucess}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>总失败次数：{{tronlinkuiToday.todayfail}}次</span>-->
-<!--  </div>-->
-
-<!--  <div>-->
-<!--  </div>-->
-<!--</el-card>-->
-<!--  </el-col>-->
-
-
-<!--<el-col :span="24">-->
-<!--    <el-card class="box-card" shadow="hover">-->
-<!--      <div slot="header" class="clearfix">-->
-<!--    <img style="width:18px;height:18px;margin-right:8px" src="../assets/tronlink.png"><span>TRONLINK API</span>-->
-<!--    <router-link to="/tronlinkapi"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>-->
-<!--  </div>-->
-<!--      <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in tronlinkapi" :key = "item" class="text item">-->
-<!--    <el-progress type="circle" :color="tronlinkapi[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(tronlinkapi[0].sucessnum/tronlinkapi[0].sum*100)"></el-progress>-->
-<!--    <div style="margin-left:7px;margin-top:10px;margin-bottom:-30px">-->
-<!--      <span>最近一次执行情况</span>-->
-<!--      <br>-->
-<!--      <span>成功用例数:{{tronlinkapi[0].sucessnum}}</span>-->
-<!--      <br>-->
-<!--      <span>失败用例数:{{tronlinkapi[0].failnum}}</span>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--      <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>-->
-
-<!--  <div style="float: left;margin-left:30px;margin-top:30px">-->
-<!--    <h4>当天执行情况</h4>-->
-<!--                <span>总执行次数：{{tronlinkapiToday.todaysum}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>总成功次数：{{tronlinkapiToday.todaysucess}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>总失败次数：{{tronlinkapiToday.todayfail}}次</span>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--  </div>-->
-<!--  </el-card>-->
-<!--  </el-col>-->
-<!--  <el-col :span="24">-->
-<!--    <el-card class="box-card" shadow="hover">-->
-<!--      <div slot="header" class="clearfix">-->
-<!--    <img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png"><span>DJED API</span>-->
-<!--    <router-link to="/djedapi"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>-->
-<!--  </div>-->
-<!--      <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in djedapi" :key = "item" class="text item">-->
-<!--    <el-progress type="circle" :color="djedapi[0].status == '1'?'#5cb87a':'#f56c6c'" :percentage="Math.ceil(djedapi[0].sucessnum/djedapi[0].sum*100)"></el-progress>-->
-<!--  <div style="margin-left:7px;margin-top:10px;margin-bottom:-30px">-->
-<!--      <span>最近一次执行情况</span>-->
-<!--      <br>-->
-<!--      <span>成功用例数:{{djedapi[0].sucessnum}}</span>-->
-<!--      <br>-->
-<!--      <span>失败用例数:{{djedapi[0].failnum}}</span>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--      <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>-->
-
-<!--  <div style="float: left;margin-left:30px;margin-top:30px">-->
-<!--  <h4>当天执行情况</h4>-->
-<!--                <span>总执行次数：{{djedapiToday.todaysum}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>总成功次数：{{djedapiToday.todaysucess}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>总失败次数：{{djedapiToday.todayfail}}次</span>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--  </div>-->
-<!--</el-card>-->
-<!--  </el-col>-->
-
-
-<!--&lt;!&ndash; <el-col v-show="djedui[0]" :span="12">-->
-<!--    <el-card class="box-card" shadow="hover">-->
-<!--      <div slot="header" class="clearfix">-->
-<!--    <img style="width:18px;height:18px;margin-right:8px" src="../assets/djed.png"><span>DJED UI</span>-->
-<!--    <router-link to="/djedui"><el-button style="float: right; padding: 3px 0" type="text">查看详情</el-button></router-link>-->
-<!--  </div>-->
-<!--      <div style="float: left;margin-left:20px;margin-bottom:30px"><div v-for="(item) in djedui" :key = "item" class="text item">-->
-<!--    <el-progress type="circle" :color="djedui[0].status == '1'?'#5cb87a':'#f56c6c'"  :percentage="Math.ceil(djedui[0].sucessnum/djedui[0].sum*100)"></el-progress>-->
-<!--  <div style="margin-left:7px;margin-top:10px;margin-bottom:-30px">-->
-<!--      <span>最近一次执行情况</span>-->
-<!--      <br>-->
-<!--      <span>成功用例数:{{djedui[0].sucessnum}}</span>-->
-<!--      <br>-->
-<!--      <span>失败用例数:{{djedui[0].failnum}}</span>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--      <div style="float: left;margin-left:20px;width:0;border-left:1px solid;border-color:#EBEEF5;height:220px"></div>-->
-
-<!--  <div style="float: left;margin-left:30px;margin-top:30px">-->
-<!--          <h4>当天执行情况</h4>-->
-<!--                <span>总执行次数：{{djeduiToday.todaysum}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>总成功次数：{{djeduiToday.todaysucess}}次</span>-->
-<!--                      <br><br>-->
-<!--                <span>总失败次数：{{djeduiToday.todayfail}}次</span>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--  </div>-->
-<!--</el-card>-->
-<!--  </el-col> &ndash;&gt;-->
-
-
-<!--</el-row>-->
-<!--  </div>-->
-<!--</template>-->
 
 <template>
-  <h1>暂无数据，待添加</h1>
+
+  <el-card v-loading="loading">
+    <div slot="header" class="clearfix">
+      <span style="font-weight: 600;font-size: 18px;">本周线上问题</span>
+<!--      <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>-->
+    </div>
+    <div style="margin-bottom: 10px;"  v-for="(item, index) in bugList" :key="index">
+      <div style="width: 120px;float: left"><el-tag style="font-weight: 600;font-size: 15px;" v-show="item.projecName" type="success">{{item.projecName}}</el-tag></div>
+      <el-tag style="font-weight: 600;font-size: 15px;" v-show="item.bugLevel" type="warning">{{item.bugLevel}}</el-tag>
+      <el-tag v-show="item.onlinetest" type="info">onlinetest</el-tag>
+      <el-popover
+          placement="top-start"
+          width="300"
+          trigger="hover"
+          :content="item.content">
+        <el-tag effect="plain" style="font-size: 15px;" slot="reference" v-show="item.content"><a target="_blank"  :href="'https://troneco.atlassian.net/browse/' +item.key">{{item.content }}</a></el-tag>
+      </el-popover>
+      <el-button size="small" @click="getmsg(item.key)" type="primary" style="margin-right: 16px;float: right">
+        查看详情
+      </el-button>
+      <el-drawer
+          title="标题"
+          :visible.sync="drawer"
+          :with-header="false"
+          size="60%">
+        <div style="height:100vh; overflow-y: auto;" v-if="bug">
+          <p>{{ bug.summary }}</p>
+          <FormattedString :inputString=bug.description />
+          <!-- add more data as required -->
+        </div>
+      </el-drawer>
+    </div>
+<!--    <div style="margin-bottom: 10px"  v-for="(item, index) in bugList" :key="index">-->
+<!--      <el-tag v-show="item.projecName" type="success">TronlinkAndroid</el-tag>-->
+<!--      <el-tag v-show="item.bugLevel" type="warning">{{item.bugLevel}}</el-tag>-->
+<!--      <el-tag v-show="item.onelinetest" type="info">onlinetest</el-tag>-->
+<!--      <el-tag v-show="item.content"><a target="_blank"  :href="'https://troneco.atlassian.net/browse/' +item.key">【偶现】DAO治理页面，点击提现JST，点击提现，新弹窗会置于旧弹窗后面；点击兑换选票，点击授权，新弹窗会置于旧弹窗后面</a></el-tag>-->
+<!--    </div>-->
+<!--    <div style="margin-bottom: 10px"  v-for="(item, index) in bugList" :key="index">-->
+<!--      <el-tag v-show="item.projecName" type="success">{{item.projecName}}</el-tag>-->
+<!--      <el-tag v-show="item.bugLevel" type="warning">{{item.bugLevel}}</el-tag>-->
+<!--      <el-tag v-show="item.onelinetest" type="info">onlinetest</el-tag>-->
+<!--      <el-tag v-show="item.content"><a target="_blank"  :href="'https://troneco.atlassian.net/browse/' +item.key">{{item.content }}</a></el-tag>-->
+<!--    </div>-->
+
+
+  </el-card>
 </template>
 <style scoped>
-.box-card {
-    width: auto;
-    margin: 5px 0;
-
-  }
-  .text {
-    font-size: 14px;
-  }
-
-  .item {
-    padding: 20px 0;
-  }
 
 </style>
 
 <script>
+  import moment from "moment";
+  import FormattedString from '@/components/HelloWorld.vue';
+
   export default {
+    components: {
+      FormattedString,
+    },
     data() {
       return {
-        tronscanui :[{}],
-        tronscanapi :[{}],
-        tronlinkui :[{}],
-        tronlinkapi :[{}],
-        djedapi :[{}],
-        djedui :[{}],
-        tronscanuiToday :[{}],
-        tronscanapiToday :[{}],
-        tronlinkuiToday :[{}],
-        tronlinkapiToday :[{}],
-        djedapiToday :[{}],
-        djeduiToday :[{}],
-
+        loading: true,
+        bugList : [],
+        show3: true,
+        drawer: false,
+        bug:[]
       }
     },
     methods:{
-      getList(){
-        this.$axios.get("/tronscanui/lastest")
-        .then(res=>{
-          console.log(res);
-          this.tronscanui = res.data;
-        }),
-        this.$axios.get("/tronscanapi/lastest")
-        .then(res=>{
-          console.log(res);
-          this.tronscanapi = res.data;
-        }),
-        this.$axios.get("/tronlinkui/lastest")
-        .then(res=>{
-          console.log(res);
-          this.tronlinkui = res.data;
-        }),
-        this.$axios.get("/tronlinkapi/lastest")
-        .then(res=>{
-          console.log(res);
-          this.tronlinkapi = res.data;
-        }),
-        this.$axios.get("/djed/lastest")
-        .then(res=>{
-          console.log(res);
-          this.djedapi = res.data;
-        }),
-        this.$axios.get("/djedui/lastest")
-        .then(res=>{
-          console.log(res);
-          this.djedui = res.data;
-        })
+      async getBugList() {
+        const start = moment().startOf("week").format("YYYY-MM-DD");
+        const end = moment().endOf("week").format("YYYY-MM-DD");
+        try {
+          const response = await this.$axios.get("/online_bug_list", {
+            params: {
+              startDate: start,
+              endDate: end
+            }
+          });
+          this.bugList = response.data;
+          this.loading = false;
+        } catch (error) {
+          console.error(error);
+        }
+
       },
-      getToday(){
-        this.$axios.get("/tronscanui/today")
-        .then(res=>{
-          console.log(res);
-          this.tronscanuiToday = res.data;
-        }),
-        this.$axios.get("/tronscanapi/today")
-        .then(res=>{
-          console.log(res);
-          this.tronscanapiToday = res.data;
-        }),
-        this.$axios.get("/tronlinkui/today")
-        .then(res=>{
-          console.log(res);
-          this.tronlinkuiToday = res.data;
-        }),
-        this.$axios.get("/tronlinkapi/today")
-        .then(res=>{
-          console.log(res);
-          this.tronlinkapiToday = res.data;
-        }),
-        this.$axios.get("/djed/today")
-        .then(res=>{
-          console.log(res);
-          this.djedapiToday = res.data;
-        }),
-        this.$axios.get("/djedui/today")
-        .then(res=>{
-          console.log(res);
-          this.djeduiToday = res.data;
-        })
+      async getmsg(key) {
+        try {
+          const response = await this.$axios.get("/online_bug", {
+            params: {
+              key: key,
+            }
+          });
+          this.bug = response.data;
+        } catch (error) {
+          console.error(error);
+        }
+        this.drawer = true;
       }
     },
-    mounted:function(){
-      this.getList();
-      this.getToday();
+    created() {
+      this.getBugList();
     }
   };
 </script>
+<style>
+.el-tag {
+  margin-left: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 542px;
+}
+</style>

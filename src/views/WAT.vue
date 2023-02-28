@@ -37,12 +37,15 @@
             <a :href="'https://troneco.atlassian.net/browse/' +scope.row.key">{{ scope.row.content }}</a>
           </template></el-table-column>
         <el-table-column sortable prop="status" label="状态" width="80px"></el-table-column>
-<!--        <el-table-column prop="projectStartTime" label="项目开始时间" width="120px"></el-table-column>-->
+        <el-table-column prop="projectStartTime" label="项目开始时间" width="110px"></el-table-column>
+
+
 <!--        <el-table-column prop="testEamilTime" label="提测时间" width="120px"></el-table-column>-->
 <!--        <el-table-column prop="testStartTime" label="测试开始时间" width="120px"></el-table-column>-->
 <!--        <el-table-column prop="testEndTime" label="测试完成时间" width="120px"></el-table-column>-->
-        <el-table-column prop="expectedTime" label="预估上线时间" width="115px"></el-table-column>
-        <el-table-column prop="projectEndTime" label="实际上线时间" width="115px"></el-table-column>
+        <el-table-column prop="expectedTime" label="预估上线时间" width="110px"></el-table-column>
+        <el-table-column prop="projectEndTime" label="实际上线时间" width="110px"></el-table-column>
+
         <el-table-column style="text-align:center" prop="businessTime" label="测试周期" width="80px"></el-table-column>
       </el-table>
     </el-card>
@@ -193,7 +196,6 @@ export default {
 
 <style>
 .big-card {
-  width: 856px;
   height: 340px;
 }
 .item-content {
