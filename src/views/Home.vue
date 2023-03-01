@@ -8,16 +8,9 @@
 <!--      <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>-->
     </div>
     <div style="margin-bottom: 10px;"  v-for="(item, index) in bugList" :key="index">
-      <div style="width: 120px;float: left"><el-tag style="font-weight: 600;font-size: 15px;" v-show="item.projecName" type="success">{{item.projecName}}</el-tag></div>
-      <el-tag style="font-weight: 600;font-size: 15px;" v-show="item.bugLevel" type="warning">{{item.bugLevel}}</el-tag>
+      <div style="width: 120px;float: left"><el-tag style="font-weight: 400;font-size: 15px;" v-show="item.projecName" type="success">{{item.projecName}}</el-tag></div>
+      <el-tag style="width:41px;font-weight: 400;font-size: 15px;" v-show="item.bugLevel" type="warning">{{item.bugLevel}}</el-tag>
       <el-tag v-show="item.onlinetest" type="info">onlinetest</el-tag>
-      <el-popover
-          placement="top-start"
-          width="300"
-          trigger="hover"
-          :content="item.content">
-        <el-tag effect="plain" style="font-size: 15px;" slot="reference" v-show="item.content"><a target="_blank"  :href="'https://troneco.atlassian.net/browse/' +item.key">{{item.content }}</a></el-tag>
-      </el-popover>
       <el-button size="small" @click="getmsg(item.key)" type="primary" style="margin-right: 16px;float: right">
         查看详情
       </el-button>
@@ -32,19 +25,15 @@
           <!-- add more data as required -->
         </div>
       </el-drawer>
+
+      <el-popover
+          placement="top-start"
+          width="300"
+          trigger="hover"
+          :content="item.content">
+        <el-tag effect="plain" style="width:570px;float:right;font-size: 15px;margin-right: 4px" slot="reference" v-show="item.content"><a target="_blank"  :href="'https://troneco.atlassian.net/browse/' +item.key">{{item.content }}</a></el-tag>
+      </el-popover>
     </div>
-<!--    <div style="margin-bottom: 10px"  v-for="(item, index) in bugList" :key="index">-->
-<!--      <el-tag v-show="item.projecName" type="success">TronlinkAndroid</el-tag>-->
-<!--      <el-tag v-show="item.bugLevel" type="warning">{{item.bugLevel}}</el-tag>-->
-<!--      <el-tag v-show="item.onelinetest" type="info">onlinetest</el-tag>-->
-<!--      <el-tag v-show="item.content"><a target="_blank"  :href="'https://troneco.atlassian.net/browse/' +item.key">【偶现】DAO治理页面，点击提现JST，点击提现，新弹窗会置于旧弹窗后面；点击兑换选票，点击授权，新弹窗会置于旧弹窗后面</a></el-tag>-->
-<!--    </div>-->
-<!--    <div style="margin-bottom: 10px"  v-for="(item, index) in bugList" :key="index">-->
-<!--      <el-tag v-show="item.projecName" type="success">{{item.projecName}}</el-tag>-->
-<!--      <el-tag v-show="item.bugLevel" type="warning">{{item.bugLevel}}</el-tag>-->
-<!--      <el-tag v-show="item.onelinetest" type="info">onlinetest</el-tag>-->
-<!--      <el-tag v-show="item.content"><a target="_blank"  :href="'https://troneco.atlassian.net/browse/' +item.key">{{item.content }}</a></el-tag>-->
-<!--    </div>-->
 
 
   </el-card>
@@ -67,7 +56,8 @@
         bugList : [],
         show3: true,
         drawer: false,
-        bug:[]
+        bug:[],
+        imageUrl: ''
       }
     },
     methods:{
