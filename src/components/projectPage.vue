@@ -75,121 +75,137 @@ export default {
     }
   },
   methods: {
+// 根据行的状态设置表格行的类名
     tableRowClassName({row}) {
-      if (row.status == "已完成"){
-        return 'success-row'
-      }else if (row.status == "需求暂停"){
-        return 'warning-row'
+      if (row.status == "已完成") {  // 如果行状态为“已完成”
+        return 'success-row'  // 返回“success-row”类名
+      } else if (row.status == "需求暂停") {  // 如果行状态为“需求暂停”
+        return 'warning-row'  // 返回“warning-row”类名
       }
     },
+
+// 处理下拉菜单选择的函数
     handleSelect(command) {
-      this.selectedTime = command;
-      if (command === "本周") {
-        this.selectWeek();
-      } else if (command === "本月") {
-        this.selectMonth();
-      } else if (command === "本季度") {
-        this.selectQuarter();
-      } else if (command === "本年") {
-        this.selectYear();
+      this.selectedTime = command;  // 将选择的时间设置为“selectedTime”
+      if (command === "本周") {  // 如果选择了“本周”
+        this.selectWeek();  // 调用“selectWeek()”函数
+      } else if (command === "本月") {  // 如果选择了“本月”
+        this.selectMonth();  // 调用“selectMonth()”函数
+      } else if (command === "本季度") {  // 如果选择了“本季度”
+        this.selectQuarter();  // 调用“selectQuarter()”函数
+      } else if (command === "本年") {  // 如果选择了“本年”
+        this.selectYear();  // 调用“selectYear()”函数
       }
     },
+
+// 更新数据的函数
     updateData(val) {
-      this.loading = true;
-      this.date = val;
-      this.fetchProjectStatus(this.projectName,this.date)
-      this.fetchProjects(this.projectName,this.date)
+      this.loading = true;  // 设置加载状态为“true”
+      this.date = val;  // 设置日期为传入的值
+      this.fetchProjectStatus(this.projectName,this.date)  // 获取项目状态
+      this.fetchProjects(this.projectName,this.date)  // 获取项目信息
     },
+
+// 选择本周
     selectWeek() {
-      this.loading = true;
-      this.selectedTime = "本周";
-      this.isThisYearSelected = false;
-      const start = moment().startOf("week").format("YYYY-MM-DD");
-      const end = moment().endOf("week").format("YYYY-MM-DD");
-      this.date = [start, end];
-      this.fetchProjectStatus(this.projectName,this.date);
-      this.fetchProjects(this.projectName,this.date);
-
+      this.loading = true;  // 设置加载状态为“true”
+      this.selectedTime = "本周";  // 将选择的时间设置为“本周”
+      this.isThisYearSelected = false;  // 设置选择的年份为“false”
+      const start = moment().startOf("week").format("YYYY-MM-DD");  // 获取本周的第一天
+      const end = moment().endOf("week").format("YYYY-MM-DD");  // 获取本周的最后一天
+      this.date = [start, end];  // 设置日期为本周的起止日期
+      this.fetchProjectStatus(this.projectName,this.date);  // 获取项目状态
+      this.fetchProjects(this.projectName,this.date);  // 获取项目信息
     },
+
+// 选择本月
     selectMonth() {
-      this.loading = true;
-      this.selectedTime = "本月";
-      this.isThisYearSelected = false;
-      const start = moment().startOf("month").format("YYYY-MM-DD");
-      const end = moment().endOf("month").format("YYYY-MM-DD");
-      this.date = [start, end];
-      this.fetchProjectStatus(this.projectName,this.date);
-      this.fetchProjects(this.projectName,this.date);
+      this.loading = true;  // 设置加载状态为“true”
+      this.selectedTime = "本月";  // 将选择的时间设置为“本月”
+      this.isThisYearSelected = false;  // 设置选择的年份为“false”
+      const start = moment().startOf("month").format("YYYY-MM-DD");  // 获取本月的第一天
+      const end = moment().endOf("month").format("YYYY-MM-DD");  // 获取本月的最后一天
+      this.date = [start, end];  // 设置日期为本月的起止日期
+      this.fetchProjectStatus(this.projectName,this.date);  // 获取项目状态
+      this.fetchProjects(this.projectName,this.date);  // 获取项目信息
+    },
 
-    },
+// 选择本季度
     selectQuarter() {
-      this.loading = true;
-      this.selectedTime = "本季度";
-      this.isThisYearSelected = false;
-      const month = moment().month();
+      this.loading = true;  // 设置加载状态为“true”
+      this.selectedTime = "本季度";  // 将选择的时间设置为“本季度”
+      this.isThisYearSelected = false;  // 设置选择的年份为“false”
+      const month = moment().month();  // 获取当前月份
       let quarterStart, quarterEnd;
-      if (month < 3) {
-        quarterStart = moment().set({ month: 0, date: 1 }).format("YYYY-MM-DD");
-        quarterEnd = moment().set({ month: 2, date: 31 }).format("YYYY-MM-DD");
-      } else if (month < 6) {
-        quarterStart = moment().set({ month: 3, date: 1 }).format("YYYY-MM-DD");
-        quarterEnd = moment().set({ month: 5, date: 30 }).format("YYYY-MM-DD");
-      } else if (month < 9) {
-        quarterStart = moment().set({ month: 6, date: 1 }).format("YYYY-MM-DD");
-        quarterEnd = moment().set({ month: 8, date: 30 }).format("YYYY-MM-DD");
-      } else {
-        quarterStart = moment().set({ month: 9, date: 1 }).format("YYYY-MM-DD");
-        quarterEnd = moment().set({ month: 11, date: 31 }).format("YYYY-MM-DD");
+      if (month < 3) {  // 如果当前月份在1~3月
+        quarterStart = moment().set({ month: 0, date: 1 }).format("YYYY-MM-DD");  // 获取第一季度的起始日期
+        quarterEnd = moment().set({ month: 2, date: 31 }).format("YYYY-MM-DD");  // 获取第一季度的结束日期
+      } else if (month < 6) {  // 如果当前月份在4~6月
+        quarterStart = moment().set({ month: 3, date: 1 }).format("YYYY-MM-DD");  // 获取第二季度的起始日期
+        quarterEnd = moment().set({ month: 5, date: 30 }).format("YYYY-MM-DD");  // 获取第二季度的结束日期
+      } else if (month < 9) {  // 如果当前月份在7~9月
+        quarterStart = moment().set({ month: 6, date: 1 }).format("YYYY-MM-DD");  // 获取第三季度的起始日期
+        quarterEnd = moment().set({ month: 8, date: 30 }).format("YYYY-MM-DD");  // 获取第三季度的结束日期
+      } else {  // 如果当前月份在10~12月
+        quarterStart = moment().set({ month: 9, date: 1 }).format("YYYY-MM-DD");  // 获取第四季度的起始日期
+        quarterEnd = moment().set({ month: 11, date: 31 }).format("YYYY-MM-DD");  // 获取第四季度的结束日期
       }
-      this.date = [quarterStart, quarterEnd];
-      this.fetchProjectStatus(this.projectName,this.date)
-      this.fetchProjects(this.projectName,this.date);
+      this.date = [quarterStart, quarterEnd];  // 设置日期为本季度的起止日期
+      this.fetchProjectStatus(this.projectName,this.date);  // 获取项目状态
+      this.fetchProjects(this.projectName,this.date);  // 获取项目信息
     },
+
+// 选择本年
     selectYear() {
-      this.loading = true;
-      this.selectedTime = "本年";
-      const start = moment().startOf("year").format("YYYY-MM-DD");
-      const end = moment().endOf("year").format("YYYY-MM-DD");
-      this.date = [start, end];
-      this.fetchProjectStatus(this.projectName,this.date);
-      this.fetchProjects(this.projectName,this.date);
+      this.loading = true;  // 设置加载状态为“true”
+      this.selectedTime = "本年";  // 将选择的时间设置为“本年”
+      const start = moment().startOf("year").format("YYYY-MM-DD");  // 获取本年的第一天
+      const end = moment().endOf("year").format("YYYY-MM-DD");  // 获取本年的最后一天
+      this.date = [start, end];  // 设置日期为本年的起止日期
+      this.fetchProjectStatus(this.projectName,this.date);  // 获取项目状态
+      this.fetchProjects(this.projectName,this.date);  // 获取项目信息
     },
+
     getData(){
       const numbers = [];
       this.items = this.items.map((item, index) => {
         return { name: item.name, number: numbers[index].toString() };
       });
     },
+// 获取项目信息
     async fetchProjects(project,date) {
       try {
         const response = await this.$axios.get("/epic",{
           params:{
-            project: project,
-            startDate: date[0],
-            endDate: date[1]
+            project: project,  // 传入项目名称
+            startDate: date[0],  // 传入日期的起始日期
+            endDate: date[1]  // 传入日期的结束日期
           }
         });
-        this.projects = response.data;
+        this.projects = response.data;  // 将返回的项目信息存储在“projects”中
       } catch (error) {
-        console.error(error);
+        console.error(error);  // 打印错误信息
       }
     },
+
+// 获取项目状态
     async fetchProjectStatus(project,date) {
       try {
         const response = await this.$axios.get("/status",{
           params:{
-            project: project,
-            startDate: date[0],
-            endDate: date[1]
+            project: project,  // 传入项目名称
+            startDate: date[0],  // 传入日期的起始日期
+            endDate: date[1]  // 传入日期的结束日期
           }
         });
-        console.log(response.data)
-        this.items = response.data;
-        this.loading = false;
+        console.log(response.data)  // 打印返回的数据
+        this.items = response.data;  // 将返回的项目状态存储在“items”中
+        this.loading = false;  // 设置加载状态为“false”
       } catch (error) {
-        console.error(error);
+        console.error(error);  // 打印错误信息
       }
     }
+
   },
   created() {
     this.selectWeek();
